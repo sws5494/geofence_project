@@ -48,7 +48,7 @@ app.post(['/data'], function(req, res){
 });
 
 app.post(['/data_insert'], function(req, res){
-  var querystring = req.query.start_time;
+  var querystring = req.query.identifier;
   console.log(querystring);
   var sql = 'INSERT INTO topic (title, description, author) VALUES(?, ?, ?)';
   var params = [querystring, "", ""];
