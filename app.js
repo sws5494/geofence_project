@@ -47,6 +47,20 @@ app.post(['/data'], function(req, res){
   });
 });
 
+app.post(['/data_insert'], function(req, res){
+  var querystring = req.query.start_time;
+  console.log(querystring);
+  var sql = 'INSERT INTO topic (title, description, author) VALUES(?, ?, ?)';
+  var params = [querystring, "", ""];
+  conn.query(sql, params, function(err, rows, fields) {
+      if (err) {
+          console.log(err);
+      } else {
+          console.log("OK");
+      }
+  });
+});
+
 app.listen(3000, function() {
     console.log('Connected 3000 port!');
 });
