@@ -10,23 +10,27 @@ var conn = mysql.createConnection({
 conn.connect();
 
 app.locals.pretty = true;
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
 
-app.get(['/index'], function(req, res) {
-    var sql = 'SELECT * FROM topic';
+app.get('/index', function(req, res) {
+    var sql = 'SELECT * FROM request';
     conn.query(sql, function(err, rows, fields) {
         if (err) {
             console.log(err);
         } else {
+            var length = rows.length;
+            console.log("check");
+            console.log(rows[0].id);
             res.render('view', {
-                rows: rows
+                rows: rows,
+                length: length
             });
         }
     });
 });
-/*
+
 app.get(['/data'], function(req, res) {
-    var sql = 'SELECT * FROM topic';
+    var sql = 'SELECT * FROM request';
     conn.query(sql, function(err, rows, fields) {
         if (err) {
             console.log(err);
@@ -34,7 +38,7 @@ app.get(['/data'], function(req, res) {
             res.send(rows);
         }
     });
-});*/
+});
 
 app.post(['/data'], function(req, res) {
     var sql = 'SELECT * FROM request';
@@ -47,22 +51,6 @@ app.post(['/data'], function(req, res) {
     });
 });
 
-/*
-app.get(['/geofence'], function(req, res) {
-    var id = req.query.id;
-    var onoff = req.query.onoff;
-    var time = req.query.time;
-    var sql = 'INSERT INTO geofence (id, onoff, time) VALUES(?, ?, ?)';
-    var params = [id, onoff, time];
-    conn.query(sql, params, function(err, rows, fields) {
-        if (err) {
-            console.log(err);
-        } else {
-            res.send(rows);
-        }
-    });
-});
-*/
 app.post(['/geofence'], function(req, res) {
     var identifier = req.query.identifier;
     var onoff = req.query.onoff;
@@ -84,6 +72,37 @@ app.post(['/geofence'], function(req, res) {
     });
 });
 
+app.get(['/request'], function(req, res) {
+    conn.connect();
+    var identifier = req.query.identifier;
+    var startday = req.query.startday;
+    var starttime = req.query.starttime;
+    var endday = req.query.endday;
+    var endtime = req.query.endtime;
+    var reason = req.query.reason;
+    var time = req.query.time;
+    var time2 = req.query.time2;
+    time = time + " " + time2;
+    console.log(identifier);
+    console.log(startday);
+    console.log(starttime);
+    console.log(endday);
+    console.log(endtime);
+    console.log(reason);
+    console.log(time);
+    var sql = 'INSERT INTO request (identifier, startday, starttime, endday, endtime, reason, time) VALUES(?, ?, ?, ?, ?, ?, ?)';
+    var params = [identifier, startday, starttime, endday, endtime, reason, time];
+    conn.query(sql, params, function(err, rows, fields) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("OK");
+
+        }
+    });
+    conn.end();
+});
+/*
 app.post(['/request'], function(req, res) {
     var identifier = req.query.identifier;
     var startday = req.query.startday;
@@ -111,7 +130,7 @@ app.post(['/request'], function(req, res) {
         }
     });
 });
-
+*/
 app.listen(3000, function() {
     console.log('Connected 3000 port!');
 });
