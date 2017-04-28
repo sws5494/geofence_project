@@ -6,66 +6,129 @@
     <title></title>
 </head>
 
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+<script type="text/javascript">
+    (function() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'http://192.168.64.166:3000/data');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var _tzs = xhr.responseText;
+                // console.log(_tzs);
+                request = JSON.parse(_tzs);
+                console.log(request.length);
+                for (var i = 0; i < request.length; i++) {
+                    mytable = document.getElementById('mytable');
+                    row = mytable.insertRow(mytable.rows.length);
+                    cell1 = row.insertCell(0);
+                    cell2 = row.insertCell(1);
+                    cell3 = row.insertCell(2);
+                    cell4 = row.insertCell(3);
+                    cell5 = row.insertCell(4);
+                    cell6 = row.insertCell(5);
+                    cell1.innerHTML = request[i].identifier;
+                    cell2.innerHTML = request[i].startday + " " + request[i].starttime;
+                    cell3.innerHTML = request[i].endday + " " + request[i].endtime;
+                    cell4.innerHTML = request[i].reason;
+                    cell5.innerHTML = request[i].time;
+                    cell6.innerHTML = '<select><option value=null>' + request[i].allow + '</option><option value=null>' + "승인" + '</option><option value=null>' + "거절" + '</option></select>';
+                }
+            }
+        }
+        xhr.send();
+    })();
+</script>
+
 <body>
     <div id="container">
-        <ul class="tabs">
-            <li class="active" rel="tab1">공지사항</li>
-            <li rel="tab2">구매랭킹</li>
-            <li rel="tab3">공지사항</li>
-        </ul>
-        <div class="tab_container">
-            <div id="tab1" class="tab_content">
-                <table border="1" width="90%" height="90%" align="center">
-                    <tr align="center">
-                        <td>1</td>
-                        <td>2</td>
-                        <td>3</td>
-                        <td>4</td>
-                        <td>5</td>
-                        <td>6</td>
-                    </tr>
+        <div id="header">
+            <ul class="tabs" align="center">
+                <li class="active" rel="tab1" id="request_list">
+                    신청목록
+                </li>
+                <li rel="tab2" id="inout_list">
+                    출입목록
+                </li>
+                <li rel="tab4" id="temp">
+                    외출관리
+                </li>
+                <li rel="tab3" id="user_list">
+                    사용자관리
+                </li>
+            </ul>
+            <div class="tab_container">
+                <div id="tab1" class="tab_content">
+                    <div class="search" width="100%" align="center">
+                        <select id="name">
+                    <option>
+                      이름
+                    </option>
+                  </select>
+                        <select id="name">
+                    <option>
+                      신청목록
+                    </option>
+                    <option>
+                      지난신청목록
+                    </option>
+                  </select>
+                    </div>
 
-                    <%
-                   for(var i=0; i<rows.length; i++)
-                   {
-                      var oneItem = rows[i];
-                      console.log("temp");
-              %>
-                        <tr align="center">
-                            <td>
-                                <%=oneItem.identifier%>
-                            </td>
-                            <td>
-                                <%=oneItem.startday%> <%=oneItem.starttime%>
-                            </td>
-                            <td>
-                                <%=oneItem.endday%> <%=oneItem.endtime%>
-                            </td>
-                            <td>
-                                <%=oneItem.reason%>
-                            </td>
-                            <td>
-                                <%=oneItem.time%>
-                            </td>
-                            <td>
-                                <%=oneItem.allow%>
-                            </td>
+                    <table width="80%" height="80%" align="center" id="mytable">
+                        <tr align="center" style="background:#bfbfbf">
+                            <td width="5%">이름</td>
+                            <td width="10%">시작시간</td>
+                            <td width="10%">종료시간</td>
+                            <td width="5%">사유</td>
+                            <td width="10%">신청시간</td>
+                            <td width="5%">상태</td>
                         </tr>
+                    </table>
+                </div>
 
-                        <%
-                   }
-              %>
-                </table>
+                <!-- #tab1 -->
+                <div id="tab2" class="tab_content">
+                    <table width="80%" height="80%" align="center" id="mytable2">
+                        <tr align="center" style="background:#bfbfbf">
+                            <td width="5%">이름</td>
+                            <td width="5%">출입여부</td>
+                            <td width="10%">출입시간</td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- #tab2 -->
+                <div id="tab3" class="tab_content">
+                    <div class="search3" width="100%" align="center">
+                        <input type="text" name="" value="이름" id="user_name"></input>
+                        <input type="text" name="" value="전화번호" id="user_phonenum"></input>
+                        <input type="button" name="" value="추가" id="user_add"></input>
+                    </div>
+
+                    <table width="80%" height="80%" align="center" id="mytable3">
+                        <tr align="center" style="background:#bfbfbf">
+                            <td width="5%">이름</td>
+                            <td width="5%">전화번호</td>
+                            <td width="5%">삭제</td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- #tab3 -->
+                <div id="tab4" class="tab_content">
+                    <table width="80%" height="80%" align="center" id="mytable4">
+                        <tr align="center" style="background:#bfbfbf">
+                            <td width="5%">이름</td>
+                            <td width="5%">전화번호</td>
+                            <td width="5%">귀원예정시간</td>
+                            <td width="10%">현재위치</td>
+                            <td width="5%">상태</td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- #tab4 -->
             </div>
-
-
-            <!-- #tab1 -->
-            <div id="tab2" class="tab_content">2222Mortal Kombat returns after a lengthy hiatus and puts players back into the Tournament for 2D fighting with gruesome combat.</div>
-            <!-- #tab2 -->
-            <div id="tab3" class="tab_content">3333Halo: Reach is the culmination of the superlative combat, sensational multiplayer, and seamless online integration that are the hallmarks of this superb series.</div>
-            <!-- #tab3 -->
+            <!-- .tab_container -->
         </div>
-        <!-- .tab_container -->
     </div>
     <!-- #container -->
 
@@ -73,9 +136,182 @@
 
 </html>
 
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
+    window.onload = function() {
 
+        var request_list = document.getElementById('request_list');
+        var inout_list = document.getElementById('inout_list');
+        var user_list = document.getElementById('user_list');
+        var user_add = document.getElementById('user_add');
+
+        request_list.onclick = function() {
+            delete_row();
+            (function() {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'http://192.168.64.166:3000/data');
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        var _tzs = xhr.responseText;
+                        // console.log(_tzs);
+                        request = JSON.parse(_tzs);
+                        console.log(request.length);
+                        for (var i = 0; i < request.length; i++) {
+                            mytable = document.getElementById('mytable');
+                            row = mytable.insertRow(mytable.rows.length);
+                            cell1 = row.insertCell(0);
+                            cell2 = row.insertCell(1);
+                            cell3 = row.insertCell(2);
+                            cell4 = row.insertCell(3);
+                            cell5 = row.insertCell(4);
+                            cell6 = row.insertCell(5);
+                            cell1.innerHTML = request[i].identifier;
+                            cell2.innerHTML = request[i].startday + " " + request[i].starttime;
+                            cell3.innerHTML = request[i].endday + " " + request[i].endtime;
+                            cell4.innerHTML = request[i].reason;
+                            cell5.innerHTML = request[i].time;
+                            cell6.innerHTML = '<select><option value=null>' + request[i].allow + '</option><option value=null>' + "승인" + '</option><option value=null>' + "거절" + '</option></select>';
+                        }
+                    }
+                }
+                xhr.send();
+            })();
+        }
+
+        inout_list.onclick = function() {
+            delete_row2();
+            (function() {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'http://192.168.64.166:3000/data_geofence');
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        var _tzs = xhr.responseText;
+                        // console.log(_tzs);
+                        geofence = JSON.parse(_tzs);
+                        console.log(geofence.length);
+                        for (var i = 0; i < geofence.length; i++) {
+                            mytable2 = document.getElementById('mytable2');
+                            row = mytable2.insertRow(mytable2.rows.length);
+                            cell1 = row.insertCell(0);
+                            cell2 = row.insertCell(1);
+                            cell3 = row.insertCell(2);
+                            cell1.innerHTML = geofence[i].identifier;
+                            cell2.innerHTML = geofence[i].onoff;
+                            cell3.innerHTML = geofence[i].time;
+                        }
+                    }
+                }
+                xhr.send();
+            })();
+        }
+
+        user_list.onclick = function() {
+            delete_row3();
+            (function() {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'http://192.168.64.166:3000/data_user');
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        var _tzs = xhr.responseText;
+                        // console.log(_tzs);
+                        user = JSON.parse(_tzs);
+                        console.log(user.length);
+                        for (var i = 0; i < user.length; i++) {
+                            mytable3 = document.getElementById('mytable3');
+                            row = mytable3.insertRow(mytable3.rows.length);
+                            cell1 = row.insertCell(0);
+                            cell2 = row.insertCell(1);
+                            cell3 = row.insertCell(2);
+                            cell1.innerHTML = user[i].name;
+                            cell2.innerHTML = user[i].phonenum;
+                            cell3.innerHTML = '<input type=button value=삭제></input>';
+                        }
+                    }
+                }
+                xhr.send();
+            })();
+        }
+
+        user_add.onclick = function() {
+            delete_row3();
+            var user_name = document.getElementById('user_name').value;
+            var user_phonenum = document.getElementById('user_phonenum').value;
+            console.log(user_name);
+            console.log(user_phonenum);
+            (function() {
+                var xhr = new XMLHttpRequest();
+                // var url = encodeURI('http://192.168.64.166:3000/user?name='+user_name+'&phonenum='+user_phonenum);
+                xhr.open('POST', 'http://192.168.64.166:3000/user?name=' + user_name + '&phonenum=' + user_phonenum);
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        console.log("OOKK");
+                    }
+                }
+                var user_data = new Object();
+                user_data.name = user_name,
+                    user_data.phonenum = user_phonenum;
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.send(JSON.stringify(user_data));
+            })();
+
+            (function() {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'http://192.168.64.166:3000/data_user');
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        var _tzs = xhr.responseText;
+                        // console.log(_tzs);
+                        user = JSON.parse(_tzs);
+                        console.log(user.length);
+                        for (var i = 0; i < user.length; i++) {
+                            mytable3 = document.getElementById('mytable3');
+                            row = mytable3.insertRow(mytable3.rows.length);
+                            cell1 = row.insertCell(0);
+                            cell2 = row.insertCell(1);
+                            cell3 = row.insertCell(2);
+                            cell1.innerHTML = user[i].name;
+                            cell2.innerHTML = user[i].phonenum;
+                            cell3.innerHTML = '<input type=button value=삭제></input>';
+                        }
+                    }
+                }
+                xhr.send();
+            })();
+        }
+
+    };
+
+    function delete_row() {
+        mytable = document.getElementById('mytable');
+        var temp = mytable.rows.length;
+        console.log("length" + mytable.rows.length);
+        for (var i = 0; i < temp - 1; i++) {
+            mytable.deleteRow(mytable.rows.length - 1);
+            console.log("삭제");
+        }
+    }
+
+    function delete_row2() {
+        mytable2 = document.getElementById('mytable2');
+        var temp = mytable2.rows.length;
+        console.log("length" + mytable2.rows.length);
+        for (var i = 0; i < temp - 1; i++) {
+            mytable2.deleteRow(mytable2.rows.length - 1);
+            console.log("삭제");
+        }
+    }
+
+    function delete_row3() {
+        mytable3 = document.getElementById('mytable3');
+        var temp = mytable3.rows.length;
+        console.log("length" + mytable3.rows.length);
+        for (var i = 0; i < temp - 1; i++) {
+            mytable3.deleteRow(mytable3.rows.length - 1);
+            console.log("삭제");
+        }
+    }
+</script>
+
+<script type="text/javascript">
     $(function() {
 
         $(".tab_content").hide();
@@ -93,7 +329,18 @@
 </script>
 
 <style media="screen">
+    #mytable,
+    #mytable2,
+    #mytable3 {
+        text-align: center;
+    }
+
+    #table_column {
+        border-bottom: 10px;
+    }
+
     ul.tabs {
+        text-align: center;
         margin: 0;
         padding: 0;
         float: left;
@@ -101,7 +348,7 @@
         height: 32px;
         border-bottom: 1px solid #eee;
         border-left: 1px solid #eee;
-        width: 100%;
+        width: 50%;
         font-family: "dotum";
         font-size: 12px;
     }
@@ -116,7 +363,7 @@
         border: 1px solid #eee;
         border-left: none;
         font-weight: bold;
-        background: #fafafa;
+        background: #f0f0f0;
         overflow: hidden;
         position: relative;
     }
@@ -131,7 +378,7 @@
         border-top: none;
         clear: both;
         float: left;
-        width: 100%;
+        width: 50%;
         background: #FFFFFF;
     }
 
@@ -153,8 +400,10 @@
     }
 
     ;
+
     #container {
-        width: 249px;
+        width: 100%;
         margin: 0 auto;
+        text-align: center;
     }
 </style>

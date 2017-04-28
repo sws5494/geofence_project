@@ -18,12 +18,10 @@ app.get('/index', function(req, res) {
         if (err) {
             console.log(err);
         } else {
-            var length = rows.length;
-            console.log("check");
-            console.log(rows[0].id);
+            var length1 = rows.length;
             res.render('view', {
                 rows: rows,
-                length: length
+                length: length1
             });
         }
     });
@@ -40,13 +38,40 @@ app.get(['/data'], function(req, res) {
     });
 });
 
-app.post(['/data'], function(req, res) {
-    var sql = 'SELECT * FROM request';
+app.get(['/data_geofence'], function(req, res) {
+    var sql = 'SELECT * FROM geofence';
     conn.query(sql, function(err, rows, fields) {
         if (err) {
             console.log(err);
         } else {
             res.send(rows);
+        }
+    });
+});
+
+app.get(['/data_user'], function(req, res) {
+    var sql = 'SELECT * FROM user';
+    conn.query(sql, function(err, rows, fields) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send(rows);
+        }
+    });
+});
+
+app.post(['/user'], function(req, res) {
+    var name = req.query.name;
+    var phonenum = req.query.phonenum;
+    console.log(name);
+    console.log(phonenum);
+    var sql = 'INSERT INTO user (name, phonenum) VALUES(?, ?)';
+    var params = [name, phonenum];
+    conn.query(sql, params, function(err, rows, fields) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send("OK");
         }
     });
 });
