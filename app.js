@@ -80,9 +80,41 @@ app.get(['/user_loc'], function(req, res) {
     });
 });
 
+app.get(['/user_state'], function(req, res) {
+    var phonenum = req.query.phonenum;
+    var state = req.query.state;
+    console.log(phonenum);
+    console.log(state);
+    phonenum = phonenum.trim();
+    var sql = 'UPDATE user SET state=? WHERE phonenum=?';
+    var params = [state, phonenum];
+    conn.query(sql, params, function(err, rows, fields) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send("OK");
+        }
+    });
+});
+
+app.post(['/request_allow'], function(req, res) {
+    var id = req.query.id;
+    var allow = req.query.allow;
+    console.log(id);
+    console.log(allow);
+    var sql = 'UPDATE request SET allow=? WHERE id=?';
+    var params = [allow, id];
+    conn.query(sql, params, function(err, rows, fields) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send("OK");
+        }
+    });
+});
 
 app.post(['/user'], function(req, res) {
-    var address = req.query.name;
+    var name = req.query.name;
     var phonenum = req.query.phonenum;
     console.log(name);
     console.log(phonenum);
@@ -103,6 +135,7 @@ app.get(['/geofence'], function(req, res) {
     var onoff = req.query.onoff;
     var time = req.query.time;
     var time2 = req.query.time2;
+    identifier = identifier.trim();
     console.log(identifier);
     console.log(onoff);
     console.log(time);
