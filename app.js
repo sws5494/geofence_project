@@ -60,13 +60,17 @@ app.get(['/data_user'], function(req, res) {
     });
 });
 
-app.post(['/user'], function(req, res) {
-    var name = req.query.name;
+
+app.get(['/user_loc'], function(req, res) {
     var phonenum = req.query.phonenum;
-    console.log(name);
+    var lat = req.query.lat;
+    var lon = req.query.lon;
     console.log(phonenum);
-    var sql = 'INSERT INTO user (name, phonenum) VALUES(?, ?)';
-    var params = [name, phonenum];
+    console.log(lat);
+    console.log(lon);
+    phonenum = phonenum.trim();
+    var sql = 'UPDATE user SET lat=?, lon=? WHERE phonenum=?';
+    var params = [lat, lon, phonenum];
     conn.query(sql, params, function(err, rows, fields) {
         if (err) {
             console.log(err);
@@ -76,6 +80,45 @@ app.post(['/user'], function(req, res) {
     });
 });
 
+
+app.post(['/user'], function(req, res) {
+    var address = req.query.name;
+    var phonenum = req.query.phonenum;
+    console.log(name);
+    console.log(phonenum);
+    var sql = 'INSERT INTO user (name, phonenum) VALUES(?, ?)';
+    var params = [name, phonenum];
+
+    conn.query(sql, params, function(err, rows, fields) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send("OK");
+        }
+    });
+});
+
+app.get(['/geofence'], function(req, res) {
+    var identifier = req.query.identifier;
+    var onoff = req.query.onoff;
+    var time = req.query.time;
+    var time2 = req.query.time2;
+    console.log(identifier);
+    console.log(onoff);
+    console.log(time);
+    console.log(time2);
+    time = time + " " + time2;
+    var sql = 'INSERT INTO geofence (identifier, onoff, time) VALUES(?, ?, ?)';
+    var params = [identifier, onoff, time];
+    conn.query(sql, params, function(err, rows, fields) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send("OK");
+        }
+    });
+});
+/*
 app.post(['/geofence'], function(req, res) {
     var identifier = req.query.identifier;
     var onoff = req.query.onoff;
@@ -96,7 +139,7 @@ app.post(['/geofence'], function(req, res) {
         }
     });
 });
-
+*/
 app.get(['/request'], function(req, res) {
     conn.connect();
     var identifier = req.query.identifier;
@@ -108,6 +151,7 @@ app.get(['/request'], function(req, res) {
     var time = req.query.time;
     var time2 = req.query.time2;
     time = time + " " + time2;
+    identifier = identifier.trim();
     console.log(identifier);
     console.log(startday);
     console.log(starttime);

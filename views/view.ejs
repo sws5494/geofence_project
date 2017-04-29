@@ -7,6 +7,7 @@
 </head>
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
 <script type="text/javascript">
     (function() {
@@ -47,13 +48,13 @@
                 <li class="active" rel="tab1" id="request_list">
                     신청목록
                 </li>
-                <li rel="tab2" id="inout_list">
-                    출입목록
-                </li>
-                <li rel="tab4" id="temp">
+                <li rel="tab2" id="out_admin">
                     외출관리
                 </li>
-                <li rel="tab3" id="user_list">
+                <li rel="tab3" id="inout_list">
+                    출입목록
+                </li>
+                <li rel="tab4" id="user_admin">
                     사용자관리
                 </li>
             </ul>
@@ -77,7 +78,7 @@
 
                     <table width="80%" height="80%" align="center" id="mytable">
                         <tr align="center" style="background:#bfbfbf">
-                            <td width="5%">이름</td>
+                            <td width="5%">이름(전화번호)</td>
                             <td width="10%">시작시간</td>
                             <td width="10%">종료시간</td>
                             <td width="5%">사유</td>
@@ -91,37 +92,36 @@
                 <div id="tab2" class="tab_content">
                     <table width="80%" height="80%" align="center" id="mytable2">
                         <tr align="center" style="background:#bfbfbf">
-                            <td width="5%">이름</td>
-                            <td width="5%">출입여부</td>
-                            <td width="10%">출입시간</td>
+                            <td width="5%">이름(전화번호)</td>
+                            <td width="5%">귀원예정시간</td>
+                            <td width="10%">현재위치</td>
+                            <td width="5%">상태</td>
                         </tr>
                     </table>
                 </div>
                 <!-- #tab2 -->
                 <div id="tab3" class="tab_content">
+                    <table width="80%" height="80%" align="center" id="mytable3">
+                        <tr align="center" style="background:#bfbfbf">
+                            <td width="5%">이름(전화번호)</td>
+                            <td width="5%">출입여부</td>
+                            <td width="10%">출입시간</td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- #tab3 -->
+                <div id="tab4" class="tab_content">
                     <div class="search3" width="100%" align="center">
                         <input type="text" name="" value="이름" id="user_name"></input>
                         <input type="text" name="" value="전화번호" id="user_phonenum"></input>
                         <input type="button" name="" value="추가" id="user_add"></input>
                     </div>
 
-                    <table width="80%" height="80%" align="center" id="mytable3">
-                        <tr align="center" style="background:#bfbfbf">
-                            <td width="5%">이름</td>
-                            <td width="5%">전화번호</td>
-                            <td width="5%">삭제</td>
-                        </tr>
-                    </table>
-                </div>
-                <!-- #tab3 -->
-                <div id="tab4" class="tab_content">
                     <table width="80%" height="80%" align="center" id="mytable4">
                         <tr align="center" style="background:#bfbfbf">
-                            <td width="5%">이름</td>
+                            <td width="5%">이름(전화번호)</td>
                             <td width="5%">전화번호</td>
-                            <td width="5%">귀원예정시간</td>
-                            <td width="10%">현재위치</td>
-                            <td width="5%">상태</td>
+                            <td width="5%">삭제</td>
                         </tr>
                     </table>
                 </div>
@@ -140,19 +140,31 @@
     window.onload = function() {
 
         var request_list = document.getElementById('request_list');
+        var out_admin = document.getElementById('out_admin');
         var inout_list = document.getElementById('inout_list');
-        var user_list = document.getElementById('user_list');
+        var user_admin = document.getElementById('user_admin');
         var user_add = document.getElementById('user_add');
 
         request_list.onclick = function() {
             delete_row();
             (function() {
                 var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'http://192.168.64.166:3000/data_user');
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        var _tzs = xhr.responseText;
+                        data_user = JSON.parse(_tzs);
+                    }
+                }
+                xhr.send();
+            })();
+
+            (function() {
+                var xhr = new XMLHttpRequest();
                 xhr.open('GET', 'http://192.168.64.166:3000/data');
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         var _tzs = xhr.responseText;
-                        // console.log(_tzs);
                         request = JSON.parse(_tzs);
                         console.log(request.length);
                         for (var i = 0; i < request.length; i++) {
@@ -164,7 +176,11 @@
                             cell4 = row.insertCell(3);
                             cell5 = row.insertCell(4);
                             cell6 = row.insertCell(5);
-                            cell1.innerHTML = request[i].identifier;
+                            for (var j = 0; j < data_user.length; j++) {
+                                if (request[i].identifier == " " + data_user[j].phonenum) {
+                                    cell1.innerHTML = data_user[j].name + "(" + data_user[j].phonenum + ")";
+                                }
+                            }
                             cell2.innerHTML = request[i].startday + " " + request[i].starttime;
                             cell3.innerHTML = request[i].endday + " " + request[i].endtime;
                             cell4.innerHTML = request[i].reason;
@@ -177,24 +193,83 @@
             })();
         }
 
-        inout_list.onclick = function() {
+        out_admin.onclick = function() {
             delete_row2();
+            (function() {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'http://192.168.64.166:3000/data');
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        var _tzs = xhr.responseText;
+                        data_request = JSON.parse(_tzs);
+                    }
+                }
+                xhr.send();
+            })();
+
+            (function() {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'http://192.168.64.166:3000/data_user');
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        var _tzs = xhr.responseText;
+                        data_user = JSON.parse(_tzs);
+                        console.log(data_user.length);
+                        mytable2 = document.getElementById('mytable2');
+                        for (var i = 0; i < data_user.length; i++) {
+                            row = mytable2.insertRow(mytable2.rows.length);
+                            cell1 = row.insertCell(0);
+                            cell2 = row.insertCell(1);
+                            cell3 = row.insertCell(2);
+                            cell4 = row.insertCell(3);
+                            cell1.innerHTML = data_user[i].name + "(" + data_user[i].phonenum + ")";
+                            for (var j = 0; j < data_request.length; j++) {
+                                console.log(data_user[i].phonenum + "=" + data_request[j].identifier);
+                                if (data_user[i].phonenum == data_request[j].identifier) {
+                                    cell2.innerHTML = data_request[i].endday + " " + data_request[i].endtime;
+                                }
+                            }
+                            cell3.innerHTML = data_user[i].lat + "=" + data_user[i].lon;
+                            cell4.innerHTML = data_user[i].state;
+                        }
+                    }
+                }
+                xhr.send();
+            })();
+        }
+
+        inout_list.onclick = function() {
+            delete_row3();
+            (function() {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'http://192.168.64.166:3000/data_user');
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        var _tzs = xhr.responseText;
+                        data_user = JSON.parse(_tzs);
+                    }
+                }
+                xhr.send();
+            })();
+
             (function() {
                 var xhr = new XMLHttpRequest();
                 xhr.open('GET', 'http://192.168.64.166:3000/data_geofence');
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         var _tzs = xhr.responseText;
-                        // console.log(_tzs);
                         geofence = JSON.parse(_tzs);
                         console.log(geofence.length);
                         for (var i = 0; i < geofence.length; i++) {
-                            mytable2 = document.getElementById('mytable2');
-                            row = mytable2.insertRow(mytable2.rows.length);
+                            mytable3 = document.getElementById('mytable3');
+                            row = mytable3.insertRow(mytable3.rows.length);
                             cell1 = row.insertCell(0);
                             cell2 = row.insertCell(1);
                             cell3 = row.insertCell(2);
-                            cell1.innerHTML = geofence[i].identifier;
+                            for (var j = 0; j < data_user.length; j++) {
+                                if (geofence[i].identifier == " " + data_user[j].phonenum)
+                                    cell1.innerHTML = data_user[j].name + "(" + data_user[j].phonenum + ")";
+                            }
                             cell2.innerHTML = geofence[i].onoff;
                             cell3.innerHTML = geofence[i].time;
                         }
@@ -204,20 +279,19 @@
             })();
         }
 
-        user_list.onclick = function() {
-            delete_row3();
+        user_admin.onclick = function() {
+            delete_row4();
             (function() {
                 var xhr = new XMLHttpRequest();
                 xhr.open('GET', 'http://192.168.64.166:3000/data_user');
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         var _tzs = xhr.responseText;
-                        // console.log(_tzs);
                         user = JSON.parse(_tzs);
                         console.log(user.length);
                         for (var i = 0; i < user.length; i++) {
-                            mytable3 = document.getElementById('mytable3');
-                            row = mytable3.insertRow(mytable3.rows.length);
+                            mytable4 = document.getElementById('mytable4');
+                            row = mytable4.insertRow(mytable4.rows.length);
                             cell1 = row.insertCell(0);
                             cell2 = row.insertCell(1);
                             cell3 = row.insertCell(2);
@@ -232,7 +306,7 @@
         }
 
         user_add.onclick = function() {
-            delete_row3();
+            delete_row4();
             var user_name = document.getElementById('user_name').value;
             var user_phonenum = document.getElementById('user_phonenum').value;
             console.log(user_name);
@@ -247,10 +321,11 @@
                     }
                 }
                 var user_data = new Object();
-                user_data.name = user_name,
-                    user_data.phonenum = user_phonenum;
-                xhr.setRequestHeader("Content-Type", "application/json");
-                xhr.send(JSON.stringify(user_data));
+                // user_data.name = user_name,
+                // user_data.phonenum = user_phonenum;
+                // xhr.setRequestHeader("Content-Type", "application/json");
+                // xhr.send(JSON.stringify(user_data));
+                xhr.send();
             })();
 
             (function() {
@@ -259,12 +334,11 @@
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         var _tzs = xhr.responseText;
-                        // console.log(_tzs);
                         user = JSON.parse(_tzs);
                         console.log(user.length);
                         for (var i = 0; i < user.length; i++) {
-                            mytable3 = document.getElementById('mytable3');
-                            row = mytable3.insertRow(mytable3.rows.length);
+                            mytable4 = document.getElementById('mytable4');
+                            row = mytable4.insertRow(mytable4.rows.length);
                             cell1 = row.insertCell(0);
                             cell2 = row.insertCell(1);
                             cell3 = row.insertCell(2);
@@ -309,8 +383,52 @@
             console.log("삭제");
         }
     }
+
+    function delete_row4() {
+        mytable4 = document.getElementById('mytable4');
+        var temp = mytable4.rows.length;
+        console.log("length" + mytable4.rows.length);
+        for (var i = 0; i < temp - 1; i++) {
+            mytable4.deleteRow(mytable4.rows.length - 1);
+            console.log("삭제");
+        }
+    }
 </script>
 
+<script type="text/javascript">
+    /*var x4 = document.getElementById("demo4");
+
+    function getLocation4() {
+        if (navigator.geolocation) {
+            navigator.geolocation.watchPosition(showPosition4);
+            getCurrentPosition은 단 한번 좌표를 알려줍니다.
+        } else {
+            x4.innerHTML = "이 브라우저는 위치추적이 지원되지 않습니다.";
+        }
+    }*/
+
+    function showPosition4(position) {
+        var forLatlng = document.getElementById("text1");
+        var forAddress = document.getElementById("text2");
+
+        forLatlng.innerHTML = ": Latitude: " + position.coords.latitude + "_$tag_Longitude: " + position.coords.longitude;
+        var geocoder = new google.maps.Geocoder();
+        var latlng = new google.maps.LatLng(position.coords.latitude,
+            position.coords.longitude);
+
+        geocoder.geocode({
+            'latLng': latlng
+        }, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                if (results[1]) {
+                    forAddress.innerHTML = results[3].formatted_address;
+                }
+            } else {
+                alert("Geocoder failed due to: " + status);
+            }
+        });
+    }
+</script>
 <script type="text/javascript">
     $(function() {
 
@@ -331,7 +449,8 @@
 <style media="screen">
     #mytable,
     #mytable2,
-    #mytable3 {
+    #mytable3,
+    #mytable4 {
         text-align: center;
     }
 
