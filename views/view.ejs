@@ -80,10 +80,11 @@
             </ul>
             <div class="tab_container">
                 <div id="tab1" class="tab_content">
-                    <div class="search" width="100%" align="center">
+                  <br>
+                    <div class="search" width="70%" align="center">
                         <select id="name">
                     <option>
-                      이름
+                      이름(전화번호)
                     </option>
                   </select>
                         <select id="name">
@@ -95,7 +96,8 @@
                     </option>
                   </select>
                     </div>
-                    <table width="80%" height="80%" align="center" id="mytable">
+                    <br>
+                    <table width="90%" height="80%" align="center" id="mytable">
                         <tr align="center" style="background:#bfbfbf">
                             <td width="5%">이름(전화번호)</td>
                             <td width="10%">시작시간</td>
@@ -110,14 +112,27 @@
 
 
                 <div id="tab2" class="tab_content">
+                  <br>
                   <div class="search" width="100%" align="center">
                       <select id="name2">
                   <option>
-                    이름
+                    이름(전화번호)
                   </option>
                 </select>
+                <select id="state">
+            <option>
+              전체
+            </option>
+            <option>
+              승인
+            </option>
+            <option>
+              미승인
+            </option>
+          </select>
                   </div>
-                    <table width="80%" height="80%" align="center" id="mytable2">
+                  <br>
+                    <table width="90%" height="80%" align="center" id="mytable2">
                         <tr align="center" style="background:#bfbfbf">
                             <td width="5%">이름(전화번호)</td>
                             <td width="5%">귀원예정시간</td>
@@ -130,13 +145,15 @@
 
                 <!-- #tab2 -->
                 <div id="tab3" class="tab_content">
+                  <br>
                   <div class="search" width="100%" align="center">
                       <select id="name3">
                   <option>
-                    이름
+                    이름(전화번호)
                   </option>
                 </select>
                   </div>
+                  <br>
                     <table width="80%" height="80%" align="center" id="mytable3">
                         <tr align="center" style="background:#bfbfbf">
                             <td width="5%">이름(전화번호)</td>
@@ -149,15 +166,16 @@
 
 
                 <div id="tab4" class="tab_content">
+                  <br>
                     <div class="search3" width="100%" align="center">
                         <input type="text" name="" value="이름" id="user_name"></input>
                         <input type="text" name="" value="전화번호" id="user_phonenum"></input>
                         <input type="button" name="" value="추가" id="user_add"></input>
                     </div>
-
-                    <table width="80%" height="80%" align="center" id="mytable4">
+<br>
+                    <table width="70%" height="80%" align="center" id="mytable4">
                         <tr align="center" style="background:#bfbfbf">
-                            <td width="5%">이름(전화번호)</td>
+                            <td width="5%">이름</td>
                             <td width="5%">전화번호</td>
                             <td width="5%">삭제</td>
                         </tr>
@@ -226,7 +244,7 @@
                             cell3.innerHTML = request[i].endday + " " + request[i].endtime;
                             cell4.innerHTML = request[i].reason;
                             cell5.innerHTML = request[i].time;
-                            cell6.innerHTML = '<select id=request_state><option value=null>' + request[i].allow + '</option><option value=null>' + "승인" + '</option><option value=null>' + "거절" + '</option></select>';
+                            cell6.innerHTML = '<select id=request_state><option value=null>' + "대기" + '</option><option value=null>' + "승인" + '</option><option value=null>' + "거절" + '</option></select>';
                         }
                     }
                 }
@@ -266,16 +284,22 @@
                             cell2 = row.insertCell(1);
                             cell3 = row.insertCell(2);
                             cell4 = row.insertCell(3);
-                            cell1.innerHTML = data_user[i].name + "(" + data_user[i].phonenum + ")";
+                            cell1.innerHTML = data_user[i].name + "<br>(" + data_user[i].phonenum + ")";
                             for (var j = 0; j < data_request.length; j++) {
                                 console.log(data_user[i].phonenum + ", " + data_request[j].identifier);
                                 if (data_user[i].phonenum == data_request[j].identifier) {
                                     cell2.innerHTML = data_request[j].endday + " " + data_request[j].endtime;
+                                    cell3.innerHTML = "부산광역시 사상구 주례1동<br>"+"("+data_user[i].lat + ", " + data_user[i].lon+")";
+                                    cell4.innerHTML = "승인";
+                                }else{
+                                  cell2.innerHTML = "null";
+                                  cell3.innerHTML = "null";
+                                  cell4.innerHTML = '<label style=color:red>미승인</label>';
                                 }
                             }
-                            // cell3.innerHTML = data_user[i].lat + "=" + data_user[i].lon;
-                            addAddress();
-                            cell4.innerHTML = "승인";
+                            // cell3.innerHTML = "("+data_user[i].lat + ", " + data_user[i].lon+")";
+                            // addAddress();
+
                         }
                     }
                 }
@@ -414,7 +438,6 @@
               xhr.send();
           })();
         }
-
     };
 
     function delete_row() {
@@ -470,7 +493,7 @@ function addAddress(){
 }
 function addrSearch(data){
     console.log(data.fullName);
-    cell3.innerHTML = data.fullName;
+    cell3.innerHTML = data.fullName+"(35.15336496, 128.99937361)";
 }
 
 </script>
@@ -513,7 +536,7 @@ function addrSearch(data){
         height: 32px;
         border-bottom: 1px solid #eee;
         border-left: 1px solid #eee;
-        width: 50%;
+        width: 40%;
         font-family: "dotum";
         font-size: 12px;
     }
@@ -543,7 +566,7 @@ function addrSearch(data){
         border-top: none;
         clear: both;
         float: left;
-        width: 50%;
+        width: 40%;
         background: #FFFFFF;
     }
 
