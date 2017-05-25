@@ -9,56 +9,56 @@
 
 
 <script type="text/javascript">
-
-
-(function() {
-    var xhr = new XMLHttpRequest();
-    // xhr.open('GET', 'http://192.168.64.166:3000/data_user');
-    xhr.open('GET', 'http://125.134.138.166:3000/data_user');
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            var _tzs = xhr.responseText;
-            data_user = JSON.parse(_tzs);
-        }
-    }
-    xhr.send();
-})();
-
-(function() {
-    var xhr = new XMLHttpRequest();
-    // xhr.open('GET', 'http://192.168.64.166:3000/data');
-    xhr.open('GET', 'http://125.134.138.166:3000/data');
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            var _tzs = xhr.responseText;
-            request = JSON.parse(_tzs);
-            console.log("request length="+request.length);
-            for (var i = 0; i < request.length; i++) {
-                mytable = document.getElementById('mytable');
-                row = mytable.insertRow(mytable.rows.length);
-                cell1 = row.insertCell(0);
-                cell2 = row.insertCell(1);
-                cell3 = row.insertCell(2);
-                cell4 = row.insertCell(3);
-                cell5 = row.insertCell(4);
-                cell6 = row.insertCell(5);
-                for (var j = 0; j < data_user.length; j++) {
-                  console.log(request[i].identifier+"="+data_user[j].phonenum);
-                    if (request[i].identifier == data_user[j].phonenum) {
-                        cell1.innerHTML = data_user[j].name + "(" + data_user[j].phonenum + ")";
-                    }
-                }
-                cell2.innerHTML = request[i].startday + " " + request[i].starttime;
-                cell3.innerHTML = request[i].endday + " " + request[i].endtime;
-                cell4.innerHTML = request[i].reason;
-                cell5.innerHTML = request[i].time;
-                console.log(request[i].id);
-                cell6.innerHTML = '<select id=request_state><option value='+request[i].id+'>' + "대기" + '</option><option value='+request[i].id+'>' + "승인" + '</option><option value='+request[i].id+'>' + "거절" + '</option></select>';
+    (function() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'http://192.168.64.166:3000/data_user');
+        // xhr.open('GET', 'http://125.134.138.166:3000/data_user');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var _tzs = xhr.responseText;
+                data_user = JSON.parse(_tzs);
             }
         }
-    }
-    xhr.send();
-})();
+        xhr.send();
+    })();
+
+    (function() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'http://192.168.64.166:3000/data');
+        // xhr.open('GET', 'http://125.134.138.166:3000/data');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var _tzs = xhr.responseText;
+                request = JSON.parse(_tzs);
+                console.log("request length=" + request.length);
+                for (var i = 0; i < request.length; i++) {
+                    mytable = document.getElementById('mytable');
+                    row = mytable.insertRow(mytable.rows.length);
+                    cell1 = row.insertCell(0);
+                    cell2 = row.insertCell(1);
+                    cell3 = row.insertCell(2);
+                    cell4 = row.insertCell(3);
+                    cell5 = row.insertCell(4);
+                    cell6 = row.insertCell(5);
+                    for (var j = 0; j < data_user.length; j++) {
+                        console.log(request[i].identifier + "=" + data_user[j].phonenum);
+                        if (request[i].identifier == data_user[j].phonenum) {
+                            cell1.innerHTML = data_user[j].name + "(" + data_user[j].phonenum + ")";
+                        }
+                    }
+                    cell2.innerHTML = request[i].startday + " " + request[i].starttime;
+                    cell3.innerHTML = request[i].endday + " " + request[i].endtime;
+                    cell4.innerHTML = request[i].reason;
+                    cell5.innerHTML = request[i].time;
+                    console.log(request[i].id);
+                    cell6.innerHTML = '<select id=request_state><option value=' + request[i].identifier + '>' + "대기" + '</option><option value=' + request[i].identifier + '>' + "승인" + '</option><option value=' + request[i].identifier + '>' +
+                        "거절" +
+                        '</option></select>';
+                }
+            }
+        }
+        xhr.send();
+    })();
 </script>
 
 <body>
@@ -80,7 +80,7 @@
             </ul>
             <div class="tab_container">
                 <div id="tab1" class="tab_content">
-                  <br>
+                    <br>
                     <div class="search" width="70%" align="center">
                         <select id="name">
                     <option>
@@ -97,9 +97,9 @@
                   </select>
                     </div>
                     <br>
-                    <table width="90%" height="80%" align="center" id="mytable">
+                    <table width="95%" height="80%" align="center" id="mytable">
                         <tr align="center" style="background:#bfbfbf">
-                            <td width="5%">이름(전화번호)</td>
+                            <td width="10%">이름(전화번호)</td>
                             <td width="10%">시작시간</td>
                             <td width="10%">종료시간</td>
                             <td width="5%">사유</td>
@@ -112,14 +112,14 @@
 
 
                 <div id="tab2" class="tab_content">
-                  <br>
-                  <div class="search" width="100%" align="center">
-                      <select id="name2">
+                    <br>
+                    <div class="search" width="100%" align="center">
+                        <select id="name2">
                   <option>
                     이름(전화번호)
                   </option>
                 </select>
-                <select id="state">
+                        <select id="state">
             <option>
               전체
             </option>
@@ -130,8 +130,8 @@
               미승인
             </option>
           </select>
-                  </div>
-                  <br>
+                    </div>
+                    <br>
                     <table width="90%" height="80%" align="center" id="mytable2">
                         <tr align="center" style="background:#bfbfbf">
                             <td width="5%">이름(전화번호)</td>
@@ -145,15 +145,15 @@
 
                 <!-- #tab2 -->
                 <div id="tab3" class="tab_content">
-                  <br>
-                  <div class="search" width="100%" align="center">
-                      <select id="name3">
+                    <br>
+                    <div class="search" width="100%" align="center">
+                        <select id="name3">
                   <option>
                     이름(전화번호)
                   </option>
                 </select>
-                  </div>
-                  <br>
+                    </div>
+                    <br>
                     <table width="80%" height="80%" align="center" id="mytable3">
                         <tr align="center" style="background:#bfbfbf">
                             <td width="5%">이름(전화번호)</td>
@@ -166,13 +166,13 @@
 
 
                 <div id="tab4" class="tab_content">
-                  <br>
+                    <br>
                     <div class="search3" width="100%" align="center">
                         <input type="text" name="" value="이름" id="user_name"></input>
                         <input type="text" name="" value="전화번호" id="user_phonenum"></input>
                         <input type="button" name="" value="추가" id="user_add"></input>
                     </div>
-<br>
+                    <br>
                     <table width="70%" height="80%" align="center" id="mytable4">
                         <tr align="center" style="background:#bfbfbf">
                             <td width="5%">이름</td>
@@ -205,8 +205,8 @@
             delete_row();
             (function() {
                 var xhr = new XMLHttpRequest();
-                // xhr.open('GET', 'http://192.168.64.166:3000/data_user');
-                xhr.open('GET', 'http://125.134.138.166:3000/data_user');
+                xhr.open('GET', 'http://192.168.64.166:3000/data_user');
+                // xhr.open('GET', 'http://125.134.138.166:3000/data_user');
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         var _tzs = xhr.responseText;
@@ -218,13 +218,13 @@
 
             (function() {
                 var xhr = new XMLHttpRequest();
-                // xhr.open('GET', 'http://192.168.64.166:3000/data');
-                xhr.open('GET', 'http://125.134.138.166:3000/data');
+                xhr.open('GET', 'http://192.168.64.166:3000/data');
+                // xhr.open('GET', 'http://125.134.138.166:3000/data');
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         var _tzs = xhr.responseText;
                         request = JSON.parse(_tzs);
-                        console.log("request length="+request.length);
+                        console.log("request length=" + request.length);
                         for (var i = 0; i < request.length; i++) {
                             mytable = document.getElementById('mytable');
                             row = mytable.insertRow(mytable.rows.length);
@@ -234,17 +234,19 @@
                             cell4 = row.insertCell(3);
                             cell5 = row.insertCell(4);
                             cell6 = row.insertCell(5);
-                            for (var j = 0; j < data_user.length; j++) {
-                              console.log(request[i].identifier+"="+data_user[j].phonenum);
-                                if (request[i].identifier == data_user[j].phonenum) {
-                                    cell1.innerHTML = data_user[j].name + "(" + data_user[j].phonenum + ")";
-                                }
-                            }
+                            cell1.innerHTML = request[i].identifier;
                             cell2.innerHTML = request[i].startday + " " + request[i].starttime;
                             cell3.innerHTML = request[i].endday + " " + request[i].endtime;
                             cell4.innerHTML = request[i].reason;
                             cell5.innerHTML = request[i].time;
                             cell6.innerHTML = '<select id=request_state><option value=null>' + "대기" + '</option><option value=null>' + "승인" + '</option><option value=null>' + "거절" + '</option></select>';
+                            for (var j = 0; j < data_user.length; j++) {
+                                console.log(request[i].identifier + "=" + data_user[j].phonenum);
+                                if (request[i].identifier == data_user[j].phonenum) {
+                                    console.log("==");
+                                    cell1.innerHTML = data_user[j].name + "<br>(" + data_user[j].phonenum + ")";
+                                }
+                            }
                         }
                     }
                 }
@@ -256,13 +258,13 @@
             delete_row2();
             (function() {
                 var xhr = new XMLHttpRequest();
-                // xhr.open('GET', 'http://192.168.64.166:3000/data');
-                xhr.open('GET', 'http://125.134.138.166:3000/data');
+                xhr.open('GET', 'http://192.168.64.166:3000/data');
+                // xhr.open('GET', 'http://125.134.138.166:3000/data');
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         var _tzs = xhr.responseText;
                         data_request = JSON.parse(_tzs);
-                        console.log("request length="+data_request.length);
+                        console.log("request length=" + data_request.length);
                     }
                 }
                 xhr.send();
@@ -270,8 +272,8 @@
 
             (function() {
                 var xhr = new XMLHttpRequest();
-                // xhr.open('GET', 'http://192.168.64.166:3000/data_user');
-                xhr.open('GET', 'http://125.134.138.166:3000/data_user');
+                xhr.open('GET', 'http://192.168.64.166:3000/data_user');
+                // xhr.open('GET', 'http://125.134.138.166:3000/data_user');
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         var _tzs = xhr.responseText;
@@ -289,12 +291,12 @@
                                 console.log(data_user[i].phonenum + ", " + data_request[j].identifier);
                                 if (data_user[i].phonenum == data_request[j].identifier) {
                                     cell2.innerHTML = data_request[j].endday + " " + data_request[j].endtime;
-                                    cell3.innerHTML = "부산광역시 사상구 주례1동<br>"+"("+data_user[i].lat + ", " + data_user[i].lon+")";
-                                    cell4.innerHTML = "승인";
-                                }else{
-                                  cell2.innerHTML = "null";
-                                  cell3.innerHTML = "null";
-                                  cell4.innerHTML = '<label style=color:red>미승인</label>';
+                                    cell3.innerHTML = "부산광역시 사상구 주례1동<br>" + "(" + data_user[i].lat + ", " + data_user[i].lon + ")";
+                                    cell4.innerHTML = data_request[i].allow;
+                                } else {
+                                    cell2.innerHTML = "null";
+                                    cell3.innerHTML = "null";
+                                    cell4.innerHTML = '<label style=color:red>미승인</label>';
                                 }
                             }
                             // cell3.innerHTML = "("+data_user[i].lat + ", " + data_user[i].lon+")";
@@ -311,8 +313,8 @@
             delete_row3();
             (function() {
                 var xhr = new XMLHttpRequest();
-                // xhr.open('GET', 'http://192.168.64.166:3000/data_user');
-                xhr.open('GET', 'http://125.134.138.166:3000/data_user');
+                xhr.open('GET', 'http://192.168.64.166:3000/data_user');
+                // xhr.open('GET', 'http://125.134.138.166:3000/data_user');
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         var _tzs = xhr.responseText;
@@ -324,8 +326,8 @@
 
             (function() {
                 var xhr = new XMLHttpRequest();
-                // xhr.open('GET', 'http://192.168.64.166:3000/data_geofence');
-                xhr.open('GET', 'http://125.134.138.166:3000/data_geofence');
+                xhr.open('GET', 'http://192.168.64.166:3000/data_geofence');
+                // xhr.open('GET', 'http://125.134.138.166:3000/data_geofence');
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         var _tzs = xhr.responseText;
@@ -339,7 +341,7 @@
                             cell3 = row.insertCell(2);
                             for (var j = 0; j < data_user.length; j++) {
                                 if (geofence[i].identifier == data_user[j].phonenum)
-                                    cell1.innerHTML = data_user[j].name + "(" + data_user[j].phonenum + ")";
+                                    cell1.innerHTML = data_user[j].name + "<br>(" + data_user[j].phonenum + ")";
                             }
                             cell2.innerHTML = geofence[i].onoff;
                             cell3.innerHTML = geofence[i].time;
@@ -354,8 +356,8 @@
             delete_row4();
             (function() {
                 var xhr = new XMLHttpRequest();
-                // xhr.open('GET', 'http://192.168.64.166:3000/data_user');
-                xhr.open('GET', 'http://125.134.138.166:3000/data_user');
+                xhr.open('GET', 'http://192.168.64.166:3000/data_user');
+                // xhr.open('GET', 'http://125.134.138.166:3000/data_user');
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         var _tzs = xhr.responseText;
@@ -386,8 +388,8 @@
             (function() {
                 var xhr = new XMLHttpRequest();
                 // var url = encodeURI('http://192.168.64.166:3000/user?name='+user_name+'&phonenum='+user_phonenum);
-                // xhr.open('POST', 'http://192.168.64.166:3000/user?name=' + user_name + '&phonenum=' + user_phonenum);
-                xhr.open('POST', 'http://125.134.138.166:3000/user?name=' + user_name + '&phonenum=' + user_phonenum);
+                xhr.open('POST', 'http://192.168.64.166:3000/user?name=' + user_name + '&phonenum=' + user_phonenum);
+                // xhr.open('POST', 'http://125.134.138.166:3000/user?name=' + user_name + '&phonenum=' + user_phonenum);
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         console.log("OOKK");
@@ -398,8 +400,8 @@
 
             (function() {
                 var xhr = new XMLHttpRequest();
-                // xhr.open('GET', 'http://192.168.64.166:3000/data_user');
-                xhr.open('GET', 'http://125.134.138.166:3000/data_user');
+                xhr.open('GET', 'http://192.168.64.166:3000/data_user');
+                // xhr.open('GET', 'http://125.134.138.166:3000/data_user');
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         var _tzs = xhr.responseText;
@@ -422,21 +424,23 @@
         }
 
         var request_state = document.getElementById('request_state');
-        request_state.onclick = function(){
-          var id = request_state.options[request_state.selectedIndex].value;
-          var allow = request_state.options[request_state.selectedIndex].text;
-          console.log(allow);
-          (function() {
-              var xhr = new XMLHttpRequest();
-              // xhr.open('GET', 'http://192.168.64.166:3000/data_user');
-              xhr.open('POST', 'http://125.134.138.166:3000/request_allow?allow='+allow+'&id='+id);
-              xhr.onreadystatechange = function() {
-                  if (xhr.readyState === 4 && xhr.status === 200) {
-
-                  }
-              }
-              xhr.send();
-          })();
+        request_state.onclick = function() {
+            console.log("click");
+            var identifier = request_state.options[request_state.selectedIndex].value;
+            var allow = request_state.options[request_state.selectedIndex].text;
+            console.log(identifier);
+            console.log(allow);
+            (function() {
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', 'http://192.168.64.166:3000/request_allow?allow=' + allow + '&identifier=' + identifier);
+                // xhr.open('POST', 'http://125.134.138.166:3000/request_allow?allow='+allow+'&id='+id);
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        console.log("OK");
+                    }
+                }
+                xhr.send();
+            })();
         }
     };
 
@@ -482,20 +486,20 @@
 </script>
 
 <script type="text/javascript">
-function addAddress(){
-    var oScript = document.createElement('script');
-    oScript.type ='text/javascript';
-    oScript.charset ='utf-8';
-    oScript.src = 'https://apis.daum.net/local/geo/coord2addr?apikey=' + '14ddcae6670e0995f030854bd3f806f1' +
-                  '&latitude=' + 35.15336496 + '&longitude=' + 128.99937361 +
-                  '&output=json&callback=addrSearch';
-    document.getElementsByTagName('head')[0].appendChild(oScript);
-}
-function addrSearch(data){
-    console.log(data.fullName);
-    cell3.innerHTML = data.fullName+"(35.15336496, 128.99937361)";
-}
+    function addAddress() {
+        var oScript = document.createElement('script');
+        oScript.type = 'text/javascript';
+        oScript.charset = 'utf-8';
+        oScript.src = 'https://apis.daum.net/local/geo/coord2addr?apikey=' + '14ddcae6670e0995f030854bd3f806f1' +
+            '&latitude=' + 35.15336496 + '&longitude=' + 128.99937361 +
+            '&output=json&callback=addrSearch';
+        document.getElementsByTagName('head')[0].appendChild(oScript);
+    }
 
+    function addrSearch(data) {
+        console.log(data.fullName);
+        cell3.innerHTML = data.fullName + "(35.15336496, 128.99937361)";
+    }
 </script>
 
 <script type="text/javascript">
@@ -566,7 +570,7 @@ function addrSearch(data){
         border-top: none;
         clear: both;
         float: left;
-        width: 40%;
+        width: 45%;
         background: #FFFFFF;
     }
 

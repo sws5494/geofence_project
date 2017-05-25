@@ -65,12 +65,31 @@ app.get(['/user_loc'], function(req, res) {
     var phonenum = req.query.phonenum;
     var lat = req.query.lat;
     var lon = req.query.lon;
+    console.log("user_loc");
     console.log(phonenum);
     console.log(lat);
     console.log(lon);
     phonenum = phonenum.trim();
     var sql = 'UPDATE user SET lat=?, lon=? WHERE phonenum=?';
     var params = [lat, lon, phonenum];
+    conn.query(sql, params, function(err, rows, fields) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send("OK");
+        }
+    });
+});
+
+app.get(['/user_gps'], function(req, res) {
+    var phonenum = req.query.phonenum;
+    var gps = req.query.gps;
+    console.log("user_gps");
+    console.log(phonenum);
+    console.log(gps);
+    phonenum = phonenum.trim();
+    var sql = 'UPDATE user SET gps=? WHERE phonenum=?';
+    var params = [gps, phonenum];
     conn.query(sql, params, function(err, rows, fields) {
         if (err) {
             console.log(err);
@@ -98,12 +117,12 @@ app.get(['/user_state'], function(req, res) {
 });
 
 app.post(['/request_allow'], function(req, res) {
-    var id = req.query.id;
+    var identifier = req.query.identifier;
     var allow = req.query.allow;
-    console.log(id);
+    console.log(identifier);
     console.log(allow);
-    var sql = 'UPDATE request SET allow=? WHERE id=?';
-    var params = [allow, id];
+    var sql = 'UPDATE request SET allow=? WHERE identifier=?';
+    var params = [allow, identifier];
     conn.query(sql, params, function(err, rows, fields) {
         if (err) {
             console.log(err);
