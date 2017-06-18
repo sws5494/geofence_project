@@ -38,6 +38,17 @@ app.get(['/data'], function(req, res) {
     });
 });
 
+app.get(['/map'], function(req, res) {
+    var identifier = req.query.identifier;
+    var lat = req.query.lat;
+    var lon = req.query.lon;
+    res.render('map', {
+        identifier: identifier,
+        lat: lat,
+        lon: lon
+    });
+});
+
 app.get(['/data_geofence'], function(req, res) {
     var sql = 'SELECT * FROM geofence';
     conn.query(sql, function(err, rows, fields) {
@@ -59,7 +70,6 @@ app.get(['/data_user'], function(req, res) {
         }
     });
 });
-
 
 app.get(['/user_loc'], function(req, res) {
     var phonenum = req.query.phonenum;
@@ -99,6 +109,23 @@ app.get(['/user_gps'], function(req, res) {
     });
 });
 
+app.get(['/user_install'], function(req, res) {
+    var phonenum = req.query.phonenum;
+    var myTime = req.query.myTime;
+    console.log(phonenum);
+    console.log(myTime);
+    phonenum = phonenum.trim();
+    var sql = 'UPDATE user SET installYN=? WHERE phonenum=?';
+    var params = [myTime, phonenum];
+    conn.query(sql, params, function(err, rows, fields) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send("OK");
+        }
+    });
+});
+
 app.get(['/user_state'], function(req, res) {
     var phonenum = req.query.phonenum;
     var state = req.query.state;
@@ -116,13 +143,31 @@ app.get(['/user_state'], function(req, res) {
     });
 });
 
+app.get(['/request_allow'], function(req, res) {
+    var identifier = req.query.identifier;
+    var notify = req.query.notify;
+    console.log("ID="+identifier);
+    console.log("널="+notify);
+    var sql = 'UPDATE request SET notify=? WHERE identifier=?';
+    var params = [notify, identifier];
+    conn.query(sql, params, function(err, rows, fields) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send("OK");
+        }
+    });
+});
+
 app.post(['/request_allow'], function(req, res) {
     var identifier = req.query.identifier;
+    var notify = req.query.notify;
     var allow = req.query.allow;
     console.log(identifier);
+    console.log(notify);
     console.log(allow);
-    var sql = 'UPDATE request SET allow=? WHERE identifier=?';
-    var params = [allow, identifier];
+    var sql = 'UPDATE request SET allow=?, notify=? WHERE id=?';
+    var params = [allow, notify, identifier];
     conn.query(sql, params, function(err, rows, fields) {
         if (err) {
             console.log(err);
@@ -140,6 +185,20 @@ app.post(['/user'], function(req, res) {
     var sql = 'INSERT INTO user (name, phonenum) VALUES(?, ?)';
     var params = [name, phonenum];
 
+    conn.query(sql, params, function(err, rows, fields) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send("OK");
+        }
+    });
+});
+
+app.post(['/user_delete'], function(req, res) {
+    var phonenum = req.query.phonenum;
+    console.log(phonenum);
+    var sql = 'DELETE from user WHERE phonenum=?';
+    var params = [phonenum];
     conn.query(sql, params, function(err, rows, fields) {
         if (err) {
             console.log(err);
