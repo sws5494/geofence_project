@@ -10,8 +10,8 @@
 <script type="text/javascript">
     (function() {
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'http://192.168.64.166:3000/data_user');
-        // xhr.open('GET', 'http://125.134.138.166:3000/data_user');
+        // xhr.open('GET', 'http://192.168.64.166:3000/data_user');
+        xhr.open('GET', 'http://112.185.119.49:3000/data_user');
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 var _tzs = xhr.responseText;
@@ -23,8 +23,8 @@
 
     (function() {
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'http://192.168.64.166:3000/data');
-        // xhr.open('GET', 'http://125.134.138.166:3000/data');
+        // xhr.open('GET', 'http://192.168.64.166:3000/data');
+        xhr.open('GET', 'http://112.185.119.49:3000/data');
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 var _tzs = xhr.responseText;
@@ -72,8 +72,8 @@
         console.log(value[0]);
         console.log(value[1]);
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'http://192.168.64.166:3000/request_allow?allow=' + value[1] + '&identifier=' + value[0] + '&notify='+ 'update');
-        // xhr.open('POST', 'http://125.134.138.166:3000/request_allow?allow='+allow+'&id='+id);
+        // xhr.open('POST', 'http://192.168.64.166:3000/request_allow?allow=' + value[1] + '&identifier=' + value[0] + '&notify='+ 'update');
+        xhr.open('POST', 'http://112.185.119.49:3000/request_allow?allow=' + value[1] + '&identifier=' + value[0] + '&notify='+ 'update');
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 console.log("OK");
@@ -98,8 +98,8 @@
         delete_row();
         (function() {
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'http://192.168.64.166:3000/data_user');
-            // xhr.open('GET', 'http://125.134.138.166:3000/data_user');
+            // xhr.open('GET', 'http://192.168.64.166:3000/data_user');
+            xhr.open('GET', 'http://112.185.119.49:3000/data_user');
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     var _tzs = xhr.responseText;
@@ -111,8 +111,8 @@
 
         (function() {
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'http://192.168.64.166:3000/data');
-            // xhr.open('GET', 'http://125.134.138.166:3000/data');
+            // xhr.open('GET', 'http://192.168.64.166:3000/data');
+            xhr.open('GET', 'http://112.185.119.49:3000/data');
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     var _tzs = xhr.responseText;
@@ -158,8 +158,8 @@
         delete_row3();
         (function() {
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'http://192.168.64.166:3000/data_user');
-            // xhr.open('GET', 'http://125.134.138.166:3000/data_user');
+            // xhr.open('GET', 'http://192.168.64.166:3000/data_user');
+            xhr.open('GET', 'http://112.185.119.49:3000/data_user');
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     var _tzs = xhr.responseText;
@@ -171,8 +171,8 @@
 
         (function() {
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'http://192.168.64.166:3000/data_geofence');
-            // xhr.open('GET', 'http://125.134.138.166:3000/data_geofence');
+            // xhr.open('GET', 'http://192.168.64.166:3000/data_geofence');
+            xhr.open('GET', 'http://112.185.119.49:3000/data_geofence');
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     var _tzs = xhr.responseText;
@@ -205,8 +205,8 @@
         delete_row();
         (function() {
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'http://192.168.64.166:3000/data_user');
-            // xhr.open('GET', 'http://125.134.138.166:3000/data_user');
+            // xhr.open('GET', 'http://192.168.64.166:3000/data_user');
+            xhr.open('GET', 'http://112.185.119.49:3000/data_user');
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     var _tzs = xhr.responseText;
@@ -218,8 +218,8 @@
 
         (function() {
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'http://192.168.64.166:3000/data');
-            // xhr.open('GET', 'http://125.134.138.166:3000/data');
+            // xhr.open('GET', 'http://192.168.64.166:3000/data');
+            xhr.open('GET', 'http://112.185.119.49:3000/data');
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     var _tzs = xhr.responseText;
@@ -485,8 +485,8 @@
             delete_row2();
             (function() {
                 var xhr = new XMLHttpRequest();
-                xhr.open('GET', 'http://192.168.64.166:3000/data');
-                // xhr.open('GET', 'http://125.134.138.166:3000/data');
+                // xhr.open('GET', 'http://192.168.64.166:3000/data');
+                xhr.open('GET', 'http://112.185.119.49:3000/data');
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         var _tzs = xhr.responseText;
@@ -499,8 +499,8 @@
 
             (function() {
                 var xhr = new XMLHttpRequest();
-                xhr.open('GET', 'http://192.168.64.166:3000/data_user');
-                // xhr.open('GET', 'http://125.134.138.166:3000/data_user');
+                // xhr.open('GET', 'http://192.168.64.166:3000/data_user');
+                xhr.open('GET', 'http://112.185.119.49:3000/data_user');
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         var _tzs = xhr.responseText;
@@ -565,8 +565,8 @@
 
             (function() {
                 var xhr = new XMLHttpRequest();
-                xhr.open('GET', 'http://192.168.64.166:3000/data_user');
-                // xhr.open('GET', 'http://125.134.138.166:3000/data_user');
+                // xhr.open('GET', 'http://192.168.64.166:3000/data_user');
+                xhr.open('GET', 'http://112.185.119.49:3000/data_user');
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         var _tzs = xhr.responseText;
@@ -578,8 +578,8 @@
 
             (function() {
                 var xhr = new XMLHttpRequest();
-                xhr.open('GET', 'http://192.168.64.166:3000/data_geofence');
-                // xhr.open('GET', 'http://125.134.138.166:3000/data_geofence');
+                // xhr.open('GET', 'http://192.168.64.166:3000/data_geofence');
+                xhr.open('GET', 'http://112.185.119.49:3000/data_geofence');
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         var _tzs = xhr.responseText;
@@ -616,8 +616,8 @@
             console.log("now=" + nowTime);
             (function() {
                 var xhr = new XMLHttpRequest();
-                xhr.open('GET', 'http://192.168.64.166:3000/data_user');
-                // xhr.open('GET', 'http://125.134.138.166:3000/data_user');
+                // xhr.open('GET', 'http://192.168.64.166:3000/data_user');
+                xhr.open('GET', 'http://112.185.119.49:3000/data_user');
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         var _tzs = xhr.responseText;
@@ -666,8 +666,8 @@
             (function() {
                 var xhr = new XMLHttpRequest();
                 // var url = encodeURI('http://192.168.64.166:3000/user?name='+user_name+'&phonenum='+user_phonenum);
-                xhr.open('POST', 'http://192.168.64.166:3000/user?name=' + user_name + '&phonenum=' + user_phonenum);
-                // xhr.open('POST', 'http://125.134.138.166:3000/user?name=' + user_name + '&phonenum=' + user_phonenum);
+                // xhr.open('POST', 'http://192.168.64.166:3000/user?name=' + user_name + '&phonenum=' + user_phonenum);
+                xhr.open('POST', 'http://112.185.119.49:3000/user?name=' + user_name + '&phonenum=' + user_phonenum);
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         console.log("OOKK");
@@ -678,8 +678,8 @@
 
             (function() {
                 var xhr = new XMLHttpRequest();
-                xhr.open('GET', 'http://192.168.64.166:3000/data_user');
-                // xhr.open('GET', 'http://125.134.138.166:3000/data_user');
+                // xhr.open('GET', 'http://192.168.64.166:3000/data_user');
+                xhr.open('GET', 'http://112.185.119.49:3000/data_user');
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         var _tzs = xhr.responseText;
@@ -792,8 +792,8 @@
 
     function delete_user(phonenum) {
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'http://192.168.64.166:3000/user_delete?phonenum=' + phonenum);
-        // xhr.open('POST', 'http://125.134.138.166:3000/request_allow?allow='+allow+'&id='+id);
+        // xhr.open('POST', 'http://192.168.64.166:3000/user_delete?phonenum=' + phonenum);
+        xhr.open('POST', 'http://112.185.119.49:3000/user_delete?phonenum=' + phonenum);
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 console.log("OK");
@@ -807,7 +807,8 @@
         console.log("0" + identifier);
         console.log(lat);
         console.log(lon);
-        var popUrl = "http://192.168.64.166:3000/map?identifier=" + identifier + "&lat=" + lat + "&lon=" + lon; //팝업창에 출력될 페이지 URL
+        // var popUrl = "http://192.168.64.166:3000/map?identifier=" + identifier + "&lat=" + lat + "&lon=" + lon; //팝업창에 출력될 페이지 URL
+        var popUrl = "http://112.185.119.49:3000/map?identifier=" + identifier + "&lat=" + lat + "&lon=" + lon; //팝업창에 출력될 페이지 URL
         var popOption = "width=1000, height=700, resizable=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
         window.open(popUrl, "", popOption);
     }
