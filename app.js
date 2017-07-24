@@ -49,6 +49,11 @@ app.get(['/map'], function(req, res) {
     });
 });
 
+app.get(['/myWorker'], function(req, res) {
+
+
+});
+
 app.get(['/data_geofence'], function(req, res) {
     var sql = 'SELECT * FROM geofence';
     conn.query(sql, function(err, rows, fields) {
@@ -72,6 +77,26 @@ app.get(['/data_user'], function(req, res) {
 });
 
 app.get(['/user_loc'], function(req, res) {
+    var phonenum = req.query.phonenum;
+    var lat = req.query.lat;
+    var lon = req.query.lon;
+    console.log("user_loc");
+    console.log(phonenum);
+    console.log(lat);
+    console.log(lon);
+    phonenum = phonenum.trim();
+    var sql = 'UPDATE user SET lat=?, lon=? WHERE phonenum=?';
+    var params = [lat, lon, phonenum];
+    conn.query(sql, params, function(err, rows, fields) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send("OK");
+        }
+    });
+});
+
+app.post(['/user_loc2'], function(req, res) {
     var phonenum = req.query.phonenum;
     var lat = req.query.lat;
     var lon = req.query.lon;
@@ -196,8 +221,36 @@ app.post(['/user'], function(req, res) {
 
 app.post(['/user_delete'], function(req, res) {
     var phonenum = req.query.phonenum;
-    console.log(phonenum);
+    console.log("여기="+phonenum);
     var sql = 'DELETE from user WHERE phonenum=?';
+    var params = [phonenum];
+    conn.query(sql, params, function(err, rows, fields) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send("OK");
+        }
+    });
+});
+
+app.post(['/user_delete2'], function(req, res) {
+    var phonenum = req.query.phonenum;
+    console.log("여기="+phonenum);
+    var sql = 'DELETE from request WHERE identifier=?';
+    var params = [phonenum];
+    conn.query(sql, params, function(err, rows, fields) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send("OK");
+        }
+    });
+});
+
+app.post(['/user_delete3'], function(req, res) {
+    var phonenum = req.query.phonenum;
+    console.log("여기="+phonenum);
+    var sql = 'DELETE from geofence WHERE identifier=?';
     var params = [phonenum];
     conn.query(sql, params, function(err, rows, fields) {
         if (err) {

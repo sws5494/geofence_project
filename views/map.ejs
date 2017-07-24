@@ -39,7 +39,7 @@
     <div id="field"></div>
 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=8473f10f901f68dc8081c4e2cb549afe&libraries=services"></script>
+    <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=b71237800fad9424af97a5aeba4c0a38&libraries=services"></script>
     <script>
         var map;
         var marker;
@@ -82,7 +82,7 @@
                     // myLocation(data_user[i].lat, data_user[i].lon);
 
                     var xhr = new XMLHttpRequest();
-                    xhr.open('GET', 'https://apis.daum.net/local/geo/coord2detailaddr?apikey=8473f10f901f68dc8081c4e2cb549afe&x=' + data_user[i].lon + '&y=' + data_user[i].lat + '&inputCoordSystem=WGS84&output=json');
+                    xhr.open('GET', 'https://apis.daum.net/local/geo/coord2detailaddr?apikey=b71237800fad9424af97a5aeba4c0a38&x=' + data_user[i].lon + '&y=' + data_user[i].lat + '&inputCoordSystem=WGS84&output=json');
                     xhr.onreadystatechange = function() {
                         if (xhr.readyState === 4 && xhr.status === 200) {
                             var _tzs = xhr.responseText;
@@ -91,7 +91,7 @@
                             infowindow.close();
 
 
-                            iwContent = '<div style="padding:15px;font-weight:bold">' + phonenum[0] + " / " + data_user2.old.name + '</div>',
+                            iwContent = '<div style="padding:10px;font-weight:bold">' + phonenum[0] + " / " + data_user2.old.name + '</div>',
                                 iwRemoveable = true;
 
                             // 인포윈도우를 생성합니다
@@ -136,14 +136,14 @@
             console.log(lat);
             console.log(lon);
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'https://apis.daum.net/local/geo/coord2detailaddr?apikey=8473f10f901f68dc8081c4e2cb549afe&x=' + lon + '&y=' + lat + '&inputCoordSystem=WGS84&output=json');
+            xhr.open('GET', 'https://apis.daum.net/local/geo/coord2detailaddr?apikey=b71237800fad9424af97a5aeba4c0a38&x=' + lon + '&y=' + lat + '&inputCoordSystem=WGS84&output=json');
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     var _tzs = xhr.responseText;
                     data_user2 = JSON.parse(_tzs);
                     console.log(data_user2.old.name);
 
-                    iwContent = '<div style="padding:15px;font-weight:bold">' + data_user2.old.name + '</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+                    iwContent = '<div style="padding:10px;font-weight:bold">' + data_user2.old.name + '</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
                         iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 
                     // 인포윈도우를 생성합니다

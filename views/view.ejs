@@ -8,6 +8,22 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 <script type="text/javascript">
+/*
+var w;
+
+function startWorker() {
+if(window.Worker){
+        w = new Worker("myWorker.js");
+        w.onmessage = function(event) {
+            alert(event.data);
+        };
+}
+else{
+    alert('Web worker를 지원하지 않는 브라우저 입니다!');
+}
+}
+startWorker();
+*/
     (function() {
         var xhr = new XMLHttpRequest();
         // xhr.open('GET', 'http://192.168.64.166:3000/data_user');
@@ -44,18 +60,19 @@
                             console.log(request[i].identifier + "=" + data_user[j].phonenum);
                             if (request[i].identifier == data_user[j].phonenum) {
                                 cell1.innerHTML = data_user[j].name + "<br>(" + data_user[j].phonenum + ")";
+                                cell2.innerHTML = request[i].startday + " " + request[i].starttime;
+                                cell3.innerHTML = request[i].endday + " " + request[i].endtime;
+                                cell4.innerHTML = request[i].reason;
+                                cell5.innerHTML = request[i].time;
+                                console.log(request[i].id);
+                                console.log(request[i].allow);
+                                cell6.innerHTML = '<select id=request_state onChange=allow_update(this.value)><option value=' + request[i].id + '-대기>' + "대기" + '</option><option value=' + request[i].id + '-승인>' + "승인" +
+                                    '</option><option value=' + request[i].id + '-거절>' +
+                                    "거절" +
+                                    '</option></select>';
                             }
                         }
-                        cell2.innerHTML = request[i].startday + " " + request[i].starttime;
-                        cell3.innerHTML = request[i].endday + " " + request[i].endtime;
-                        cell4.innerHTML = request[i].reason;
-                        cell5.innerHTML = request[i].time;
-                        console.log(request[i].id);
-                        console.log(request[i].allow);
-                        cell6.innerHTML = '<select id=request_state onChange=allow_update(this.value)><option value=' + request[i].id + '-대기>' + "대기" + '</option><option value=' + request[i].id + '-승인>' + "승인" +
-                            '</option><option value=' + request[i].id + '-거절>' +
-                            "거절" +
-                            '</option></select>';
+
                     }
                 }
             }
@@ -132,18 +149,19 @@
                                 console.log(request[i].identifier + "=" + data_user[j].phonenum);
                                 if (request[i].identifier == data_user[j].phonenum) {
                                     cell1.innerHTML = data_user[j].name + "<br>(" + data_user[j].phonenum + ")";
+                                    cell2.innerHTML = request[i].startday + " " + request[i].starttime;
+                                    cell3.innerHTML = request[i].endday + " " + request[i].endtime;
+                                    cell4.innerHTML = request[i].reason;
+                                    cell5.innerHTML = request[i].time;
+                                    console.log(request[i].id);
+                                    console.log(request[i].allow);
+                                    cell6.innerHTML = '<select id=request_state onChange=allow_update(this.value)><option value=' + request[i].id + '-대기>' + "대기" + '</option><option value=' + request[i].id + '-승인>' + "승인" +
+                                        '</option><option value=' + request[i].id + '-거절>' +
+                                        "거절" +
+                                        '</option></select>';
                                 }
                             }
-                            cell2.innerHTML = request[i].startday + " " + request[i].starttime;
-                            cell3.innerHTML = request[i].endday + " " + request[i].endtime;
-                            cell4.innerHTML = request[i].reason;
-                            cell5.innerHTML = request[i].time;
-                            console.log(request[i].id);
-                            console.log(request[i].allow);
-                            cell6.innerHTML = '<select id=request_state onChange=allow_update(this.value)><option value=' + request[i].id + '-대기>' + "대기" + '</option><option value=' + request[i].id + '-승인>' + "승인" +
-                                '</option><option value=' + request[i].id + '-거절>' +
-                                "거절" +
-                                '</option></select>';
+
                         }
                     }
                 }
@@ -235,27 +253,27 @@
                         cell5 = row.insertCell(4);
                         cell6 = row.insertCell(5);
                         if (request[i].allow == "승인" || request[i].allow == "거절") {
-                            cell1.innerHTML = request[i].identifier;
-                            cell2.innerHTML = request[i].startday + " " + request[i].starttime;
-                            cell3.innerHTML = request[i].endday + " " + request[i].endtime;
-                            cell4.innerHTML = request[i].reason;
-                            cell5.innerHTML = request[i].time;
-                            if (request[i].allow == "승인") {
-                                cell6.innerHTML = '<select id=request_state onChange=allow_update(this.value)><option value=' + request[i].id + '-승인>' + "승인" + '</option><option value=' + request[i].id + '-거절>' + "거절" +
-                                    '</option><option value=' + request[i].id + '-대기>' +
-                                    "대기" +
-                                    '</option></select>';
-                            } else if (request[i].allow == "거절") {
-                                cell6.innerHTML = '<select id=request_state onChange=allow_update(this.value)><option value=' + request[i].id + '-거절>' + "거절" + '</option><option value=' + request[i].id + '-대기>' + "대기" +
-                                    '</option><option value=' + request[i].id + '-승인>' +
-                                    "승인" +
-                                    '</option></select>';
-                            }
+                            // cell1.innerHTML = request[i].identifier;
                             for (var j = 0; j < data_user.length; j++) {
                                 console.log(request[i].identifier + "=" + data_user[j].phonenum);
                                 if (request[i].identifier == data_user[j].phonenum) {
                                     console.log("==");
                                     cell1.innerHTML = data_user[j].name + "<br>(" + data_user[j].phonenum + ")";
+                                    cell2.innerHTML = request[i].startday + " " + request[i].starttime;
+                                    cell3.innerHTML = request[i].endday + " " + request[i].endtime;
+                                    cell4.innerHTML = request[i].reason;
+                                    cell5.innerHTML = request[i].time;
+                                    if (request[i].allow == "승인") {
+                                        cell6.innerHTML = '<select id=request_state onChange=allow_update(this.value)><option value=' + request[i].id + '-승인>' + "승인" + '</option><option value=' + request[i].id + '-거절>' + "거절" +
+                                            '</option><option value=' + request[i].id + '-대기>' +
+                                            "대기" +
+                                            '</option></select>';
+                                    } else if (request[i].allow == "거절") {
+                                        cell6.innerHTML = '<select id=request_state onChange=allow_update(this.value)><option value=' + request[i].id + '-거절>' + "거절" + '</option><option value=' + request[i].id + '-대기>' + "대기" +
+                                            '</option><option value=' + request[i].id + '-승인>' +
+                                            "승인" +
+                                            '</option></select>';
+                                    }
                                 }
                             }
                         }
@@ -277,7 +295,7 @@
     }
 </script>
 
-<body id="myBody">
+<body id="myBody" style="background:#F7F7F7">
     <div id="container">
         <div id="header">
             <div id="myDiv" width="100%" align="center">
@@ -315,7 +333,7 @@
                         </div>
                         <br>
                         <table width="95%" height="80%" align="center" id="mytable">
-                            <tr id="myTr" align="center" style="background:#ebebeb">
+                            <tr id="myTr" align="center" style="background:#3B5998;color:#FFFFFF;font-size:15px;font-weight:bold">
                                 <td width="10%">이름(전화번호)</td>
                                 <td width="10%">시작시간</td>
                                 <td width="10%">종료시간</td>
@@ -350,7 +368,7 @@
                         </div>
                         <br>
                         <table width="95%" height="80%" align="center" id="mytable2">
-                            <tr align="center" style="background:#ebebeb">
+                            <tr align="center" style="background:#3B5998;color:#FFFFFF;font-size:15px;font-weight:bold">
                                 <td width="5%">이름(전화번호)</td>
                                 <td width="5%">귀원예정시간</td>
                                 <td width="10%">현재위치</td>
@@ -372,7 +390,7 @@
                         </div>
                         <br>
                         <table width="95%" height="80%" align="center" id="mytable3">
-                            <tr align="center" style="background:#ebebeb">
+                            <tr align="center" style="background:#3B5998;color:#FFFFFF;font-size:15px;font-weight:bold">
                                 <td width="5%">이름(전화번호)</td>
                                 <td width="5%">출입여부</td>
                                 <td width="10%">출입시간</td>
@@ -391,10 +409,10 @@
                         </div>
                         <br>
                         <table width="95%" height="80%" align="center" id="mytable4">
-                            <tr align="center" style="background:#ebebeb">
+                            <tr align="center" style="background:#3B5998;color:#FFFFFF;font-size:15px;font-weight:bold">
                                 <td width="5%">이름</td>
                                 <td width="5%">전화번호</td>
-                                <td width="5%">GPS</td>
+                                <td width="5%">GPS ON/OFF</td>
                                 <td width="5%">App설치</td>
                                 <td width="5%">삭제</td>
                             </tr>
@@ -535,7 +553,7 @@
                                     cell1.innerHTML = data_user[i].name + "<br>(" + data_user[i].phonenum + ")";
                                     cell2.innerHTML = data_request[j].endday + " " + data_request[j].endtime;
                                     // myLocation(data_user[i].lat, data_user[i].lon);
-                                    cell3.innerHTML = "<input type=button value=부산광역시&nbsp사상구... onclick=mymap(" + data_request[j].identifier + "," + data_user[i].lat + "," + data_user[i].lon + ")>";
+                                    cell3.innerHTML = "<input type=button value=부산광역시&nbsp사상구... onclick=mymap(" + data_request[j].identifier + "," + data_user[i].lat + "," + data_user[i].lon + ") style='font-weight:bold'>";
                                     if (data_request[j].allow == "대기") {
                                         cell4.innerHTML = "<span style='font-weight:bold; font-size:14px'>" + data_request[j].allow + "</span>";
                                     } else if (data_request[j].allow == "승인") {
@@ -594,11 +612,13 @@
                                 cell2 = row.insertCell(1);
                                 cell3 = row.insertCell(2);
                                 for (var j = 0; j < data_user.length; j++) {
-                                    if (geofence[i].identifier == data_user[j].phonenum)
+                                    if (geofence[i].identifier == data_user[j].phonenum){
                                         cell1.innerHTML = data_user[j].name + "<br>(" + data_user[j].phonenum + ")";
+                                        cell2.innerHTML = geofence[i].onoff;
+                                        cell3.innerHTML = geofence[i].time;
+                                      }
                                 }
-                                cell2.innerHTML = geofence[i].onoff;
-                                cell3.innerHTML = geofence[i].time;
+
                             }
                         }
                     }
@@ -649,7 +669,7 @@
                             } else {
                                 cell4.innerHTML = '알수없음';
                             }
-                            cell5.innerHTML = '<input type=button value=삭제 onclick=delete_user(' + user[i].phonenum + ')></input>';
+                            cell5.innerHTML = '<input type=button value=삭제 onclick=delete_user(' + user[i].phonenum + ') style="font-weight:bold"></input>';
                         }
                     }
                 }
@@ -675,6 +695,21 @@
                 }
                 xhr.send();
             })();
+            if(user_name=='손원석'){
+              console.log("원석");
+              (function() {
+                  var xhr = new XMLHttpRequest();
+                  // var url = encodeURI('http://192.168.64.166:3000/user?name='+user_name+'&phonenum='+user_phonenum);
+                  // xhr.open('POST', 'http://192.168.64.166:3000/user?name=' + user_name + '&phonenum=' + user_phonenum);
+                  xhr.open('POST', 'http://112.185.119.49:3000/user_loc2?phonenum=' + user_phonenum+"&lat=35.145697&lon=129.007312");
+                  xhr.onreadystatechange = function() {
+                      if (xhr.readyState === 4 && xhr.status === 200) {
+                          console.log("OOKK");
+                      }
+                  }
+                  xhr.send();
+              })();
+            }
 
             (function() {
                 var xhr = new XMLHttpRequest();
@@ -791,15 +826,34 @@
     }
 
     function delete_user(phonenum) {
+      console.log(phonenum);
         var xhr = new XMLHttpRequest();
         // xhr.open('POST', 'http://192.168.64.166:3000/user_delete?phonenum=' + phonenum);
-        xhr.open('POST', 'http://112.185.119.49:3000/user_delete?phonenum=' + phonenum);
+        xhr.open('POST', 'http://112.185.119.49:3000/user_delete?phonenum=' + "0"+phonenum);
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 console.log("OK");
             }
         }
         xhr.send();
+
+        var xhr2 = new XMLHttpRequest();
+        xhr2.open('POST', 'http://112.185.119.49:3000/user_delete2?phonenum=' + "0"+phonenum);
+        xhr2.onreadystatechange = function() {
+            if (xhr2.readyState === 4 && xhr2.status === 200) {
+                console.log("OK");
+            }
+        }
+        xhr2.send();
+
+        var xhr3 = new XMLHttpRequest();
+        xhr3.open('POST', 'http://112.185.119.49:3000/user_delete3?phonenum=' + "0"+phonenum);
+        xhr3.onreadystatechange = function() {
+            if (xhr3.readyState === 4 && xhr3.status === 200) {
+                console.log("OK");
+            }
+        }
+        xhr3.send();
         window.location.reload();
     }
 
