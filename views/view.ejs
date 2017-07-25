@@ -6,28 +6,29 @@
     <title></title>
 </head>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=b71237800fad9424af97a5aeba4c0a38&libraries=services"></script>
 
 <script type="text/javascript">
-/*
-var w;
+    /*
+                                                                            var w;
 
-function startWorker() {
-if(window.Worker){
-        w = new Worker("myWorker.js");
-        w.onmessage = function(event) {
-            alert(event.data);
-        };
-}
-else{
-    alert('Web worker를 지원하지 않는 브라우저 입니다!');
-}
-}
-startWorker();
-*/
+                                                                            function startWorker() {
+                                                                            if(window.Worker){
+                                                                                    w = new Worker("myWorker.js");
+                                                                                    w.onmessage = function(event) {
+                                                                                        alert(event.data);
+                                                                                    };
+                                                                            }
+                                                                            else{
+                                                                                alert('Web worker를 지원하지 않는 브라우저 입니다!');
+                                                                            }
+                                                                            }
+                                                                            startWorker();
+                                                                            */
     (function() {
         var xhr = new XMLHttpRequest();
         // xhr.open('GET', 'http://192.168.64.166:3000/data_user');
-        xhr.open('GET', 'http://112.185.119.49:3000/data_user');
+        xhr.open('GET', 'http://192.168.64.166:3000/data_user');
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 var _tzs = xhr.responseText;
@@ -40,7 +41,7 @@ startWorker();
     (function() {
         var xhr = new XMLHttpRequest();
         // xhr.open('GET', 'http://192.168.64.166:3000/data');
-        xhr.open('GET', 'http://112.185.119.49:3000/data');
+        xhr.open('GET', 'http://192.168.64.166:3000/data');
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 var _tzs = xhr.responseText;
@@ -90,7 +91,7 @@ startWorker();
         console.log(value[1]);
         var xhr = new XMLHttpRequest();
         // xhr.open('POST', 'http://192.168.64.166:3000/request_allow?allow=' + value[1] + '&identifier=' + value[0] + '&notify='+ 'update');
-        xhr.open('POST', 'http://112.185.119.49:3000/request_allow?allow=' + value[1] + '&identifier=' + value[0] + '&notify='+ 'update');
+        xhr.open('POST', 'http://192.168.64.166:3000/request_allow?allow=' + value[1] + '&identifier=' + value[0] + '&notify=' + 'update');
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 console.log("OK");
@@ -116,7 +117,7 @@ startWorker();
         (function() {
             var xhr = new XMLHttpRequest();
             // xhr.open('GET', 'http://192.168.64.166:3000/data_user');
-            xhr.open('GET', 'http://112.185.119.49:3000/data_user');
+            xhr.open('GET', 'http://192.168.64.166:3000/data_user');
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     var _tzs = xhr.responseText;
@@ -129,7 +130,7 @@ startWorker();
         (function() {
             var xhr = new XMLHttpRequest();
             // xhr.open('GET', 'http://192.168.64.166:3000/data');
-            xhr.open('GET', 'http://112.185.119.49:3000/data');
+            xhr.open('GET', 'http://192.168.64.166:3000/data');
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     var _tzs = xhr.responseText;
@@ -177,7 +178,7 @@ startWorker();
         (function() {
             var xhr = new XMLHttpRequest();
             // xhr.open('GET', 'http://192.168.64.166:3000/data_user');
-            xhr.open('GET', 'http://112.185.119.49:3000/data_user');
+            xhr.open('GET', 'http://192.168.64.166:3000/data_user');
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     var _tzs = xhr.responseText;
@@ -190,7 +191,7 @@ startWorker();
         (function() {
             var xhr = new XMLHttpRequest();
             // xhr.open('GET', 'http://192.168.64.166:3000/data_geofence');
-            xhr.open('GET', 'http://112.185.119.49:3000/data_geofence');
+            xhr.open('GET', 'http://192.168.64.166:3000/data_geofence');
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     var _tzs = xhr.responseText;
@@ -224,7 +225,7 @@ startWorker();
         (function() {
             var xhr = new XMLHttpRequest();
             // xhr.open('GET', 'http://192.168.64.166:3000/data_user');
-            xhr.open('GET', 'http://112.185.119.49:3000/data_user');
+            xhr.open('GET', 'http://192.168.64.166:3000/data_user');
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     var _tzs = xhr.responseText;
@@ -237,7 +238,7 @@ startWorker();
         (function() {
             var xhr = new XMLHttpRequest();
             // xhr.open('GET', 'http://192.168.64.166:3000/data');
-            xhr.open('GET', 'http://112.185.119.49:3000/data');
+            xhr.open('GET', 'http://192.168.64.166:3000/data');
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     var _tzs = xhr.responseText;
@@ -312,6 +313,9 @@ startWorker();
                     <li rel="tab4" id="user_admin">
                         사용자관리
                     </li>
+                    <li rel="tab5" id="set_geo">
+                        지오펜스설정
+                    </li>
                 </ul>
                 <div class="tab_container">
                     <div id="tab1" class="tab_content">
@@ -333,7 +337,7 @@ startWorker();
                         </div>
                         <br>
                         <table width="95%" height="80%" align="center" id="mytable">
-                            <tr id="myTr" align="center" style="background:#3B5998;color:#FFFFFF;font-size:15px;font-weight:bold">
+                            <tr id="myTr" align="center" style="background:#3B5998;color:#FFFFFF;font-size:14px;font-weight:bold">
                                 <td width="10%">이름(전화번호)</td>
                                 <td width="10%">시작시간</td>
                                 <td width="10%">종료시간</td>
@@ -368,7 +372,7 @@ startWorker();
                         </div>
                         <br>
                         <table width="95%" height="80%" align="center" id="mytable2">
-                            <tr align="center" style="background:#3B5998;color:#FFFFFF;font-size:15px;font-weight:bold">
+                            <tr align="center" style="background:#3B5998;color:#FFFFFF;font-size:14px;font-weight:bold">
                                 <td width="5%">이름(전화번호)</td>
                                 <td width="5%">귀원예정시간</td>
                                 <td width="10%">현재위치</td>
@@ -390,7 +394,7 @@ startWorker();
                         </div>
                         <br>
                         <table width="95%" height="80%" align="center" id="mytable3">
-                            <tr align="center" style="background:#3B5998;color:#FFFFFF;font-size:15px;font-weight:bold">
+                            <tr align="center" style="background:#3B5998;color:#FFFFFF;font-size:14px;font-weight:bold">
                                 <td width="5%">이름(전화번호)</td>
                                 <td width="5%">출입여부</td>
                                 <td width="10%">출입시간</td>
@@ -409,7 +413,7 @@ startWorker();
                         </div>
                         <br>
                         <table width="95%" height="80%" align="center" id="mytable4">
-                            <tr align="center" style="background:#3B5998;color:#FFFFFF;font-size:15px;font-weight:bold">
+                            <tr align="center" style="background:#3B5998;color:#FFFFFF;font-size:14px;font-weight:bold">
                                 <td width="5%">이름</td>
                                 <td width="5%">전화번호</td>
                                 <td width="5%">GPS ON/OFF</td>
@@ -419,13 +423,309 @@ startWorker();
                         </table>
                     </div>
                     <!-- #tab4 -->
+
+
+                    <div id="tab5" class="tab_content">
+                        <br>
+                        <div class="search5" width="100%" align="center">
+                            <div id="map" style="width:100%;height:350px;"></div>
+                            <br>
+                            <!-- <button onclick="removeCircles()">모두 지우기</button> -->
+
+                            <input type="button" name="" value="추가" id="" onclick="geoMap()"></input>
+                            <input type="button" name="" value="테스트" id="" onclick="myGeoTest()"></input>
+                            <input type="button" name="" value="삭제" id="" onclick="removeCircles2()"></input>
+
+                        </div>
+                        <br>
+                        <table width="95%" height="80%" align="center" id="mytable5">
+                            <tr align="center" style="background:#3B5998;color:#FFFFFF;font-size:14px;font-weight:bold">
+                                <td width="20%">보기</td>
+                                <td width="20%">위도</td>
+                                <td width="20%">경도</td>
+                                <td width="20%">범위</td>
+                                <td width="20%">삭제</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <!-- #tab5 -->
+
+
                 </div>
                 <!-- .tab_container -->
             </div>
         </div>
     </div>
     <!-- #container -->
+    <script>
+        var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+            mapOption = {
+                center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                level: 2 // 지도의 확대 레벨
+            };
 
+        var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+        var locFlag = false;
+        var lat = 0;
+        var lon = 0;
+        var lastlat = 0;
+        var lastlon = 0;
+        var range = 0;
+        var drawingFlag = false; // 원이 그려지고 있는 상태를 가지고 있을 변수입니다
+        var centerPosition; // 원의 중심좌표 입니다
+        var drawingCircle; // 그려지고 있는 원을 표시할 원 객체입니다
+        var drawingLine; // 그려지고 있는 원의 반지름을 표시할 선 객체입니다
+        var drawingOverlay; // 그려지고 있는 원의 반경을 표시할 커스텀오버레이 입니다
+        var drawingDot; // 그려지고 있는 원의 중심점을 표시할 커스텀오버레이 입니다
+
+        var circles = []; // 클릭으로 그려진 원과 반경 정보를 표시하는 선과 커스텀오버레이를 가지고 있을 배열입니다
+
+        // 지도에 클릭 이벤트를 등록합니다
+        daum.maps.event.addListener(map, 'click', function(mouseEvent) {
+            // 클릭 이벤트가 발생했을 때 원을 그리고 있는 상태가 아니면 중심좌표를 클릭한 지점으로 설정합니다
+            // if (!drawingFlag) {
+
+            // 상태를 그리고있는 상태로 변경합니다
+            drawingFlag = true;
+
+            // 원이 그려질 중심좌표를 클릭한 위치로 설정합니다
+            centerPosition = mouseEvent.latLng;
+            // centerPosition = new daum.maps.LatLng(33.450701, 126.570667);
+            console.log(centerPosition);
+            // 그려지고 있는 원의 반경을 표시할 선 객체를 생성합니다
+            if (!drawingLine) {
+                drawingLine = new daum.maps.Polyline({
+                    strokeWeight: 3, // 선의 두께입니다
+                    strokeColor: '#00a0e9', // 선의 색깔입니다
+                    strokeOpacity: 1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+                    strokeStyle: 'solid' // 선의 스타일입니다
+                });
+            }
+
+            // 그려지고 있는 원을 표시할 원 객체를 생성합니다
+            if (!drawingCircle) {
+                drawingCircle = new daum.maps.Circle({
+                    strokeWeight: 1, // 선의 두께입니다
+                    strokeColor: '#00a0e9', // 선의 색깔입니다
+                    strokeOpacity: 0.1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+                    strokeStyle: 'solid', // 선의 스타일입니다
+                    fillColor: '#00a0e9', // 채우기 색깔입니다
+                    fillOpacity: 0.2 // 채우기 불투명도입니다
+                });
+            }
+
+            // 그려지고 있는 원의 반경 정보를 표시할 커스텀오버레이를 생성합니다
+            if (!drawingOverlay) {
+                drawingOverlay = new daum.maps.CustomOverlay({
+                    xAnchor: 0,
+                    yAnchor: 0,
+                    zIndex: 1
+                });
+            }
+            // }
+        });
+
+        // 지도에 마우스무브 이벤트를 등록합니다
+        // 원을 그리고있는 상태에서 마우스무브 이벤트가 발생하면 그려질 원의 위치와 반경정보를 동적으로 보여주도록 합니다
+        daum.maps.event.addListener(map, 'mousemove', function(mouseEvent) {
+
+            // 마우스무브 이벤트가 발생했을 때 원을 그리고있는 상태이면
+            if (drawingFlag) {
+
+                // 마우스 커서의 현재 위치를 얻어옵니다
+                var mousePosition = mouseEvent.latLng;
+                console.log(mousePosition.ib);
+                console.log(mousePosition.hb);
+                if (!locFlag) {
+                    removeCircles();
+                    lat = mousePosition.ib;
+                    lon = mousePosition.hb;
+                    locFlag = true;
+                }
+
+                // 그려지고 있는 선을 표시할 좌표 배열입니다. 클릭한 중심좌표와 마우스커서의 위치로 설정합니다
+                var linePath = [centerPosition, mousePosition];
+
+                // 그려지고 있는 선을 표시할 선 객체에 좌표 배열을 설정합니다
+                drawingLine.setPath(linePath);
+
+                // 원의 반지름을 선 객체를 이용해서 얻어옵니다
+                var length = drawingLine.getLength();
+
+                if (length > 0) {
+
+                    // 그려지고 있는 원의 중심좌표와 반지름입니다
+                    var circleOptions = {
+                        center: centerPosition,
+                        radius: length,
+                    };
+
+                    // 그려지고 있는 원의 옵션을 설정합니다
+                    drawingCircle.setOptions(circleOptions);
+
+                    // 반경 정보를 표시할 커스텀오버레이의 내용입니다
+                    var radius = Math.round(drawingCircle.getRadius()),
+                        content = '<div class="info">반경 <span class="number">' + radius + '</span>m</div>';
+
+                    // 반경 정보를 표시할 커스텀 오버레이의 좌표를 마우스커서 위치로 설정합니다
+                    drawingOverlay.setPosition(mousePosition);
+
+                    // 반경 정보를 표시할 커스텀 오버레이의 표시할 내용을 설정합니다
+                    drawingOverlay.setContent(content);
+
+                    // 그려지고 있는 원을 지도에 표시합니다
+                    drawingCircle.setMap(map);
+
+                    // 그려지고 있는 선을 지도에 표시합니다
+                    drawingLine.setMap(map);
+
+                    // 그려지고 있는 원의 반경정보 커스텀 오버레이를 지도에 표시합니다
+                    drawingOverlay.setMap(map);
+
+                } else {
+
+                    drawingCircle.setMap(null);
+                    drawingLine.setMap(null);
+                    drawingOverlay.setMap(null);
+
+                }
+            }
+        });
+
+        // 지도에 마우스 오른쪽 클릭이벤트를 등록합니다
+        // 원을 그리고있는 상태에서 마우스 오른쪽 클릭 이벤트가 발생하면
+        // 마우스 오른쪽 클릭한 위치를 기준으로 원과 원의 반경정보를 표시하는 선과 커스텀 오버레이를 표시하고 그리기를 종료합니다
+        daum.maps.event.addListener(map, 'rightclick', function(mouseEvent) {
+
+            if (drawingFlag) {
+                locFlag = false;
+                // 마우스로 오른쪽 클릭한 위치입니다
+                var rClickPosition = mouseEvent.latLng;
+                // console.log(rClickPosition);
+                lastlat = rClickPosition.ib;
+                lastlon = rClickPosition.hb;
+                // 원의 반경을 표시할 선 객체를 생성합니다
+                var polyline = new daum.maps.Polyline({
+                    path: [centerPosition, rClickPosition], // 선을 구성하는 좌표 배열입니다. 원의 중심좌표와 클릭한 위치로 설정합니다
+                    strokeWeight: 3, // 선의 두께 입니다
+                    strokeColor: '#00a0e9', // 선의 색깔입니다
+                    strokeOpacity: 1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+                    strokeStyle: 'solid' // 선의 스타일입니다
+                });
+
+                // 원 객체를 생성합니다
+                var circle = new daum.maps.Circle({
+                    center: centerPosition, // 원의 중심좌표입니다
+                    radius: polyline.getLength(), // 원의 반지름입니다 m 단위 이며 선 객체를 이용해서 얻어옵니다
+                    strokeWeight: 1, // 선의 두께입니다
+                    strokeColor: '#00a0e9', // 선의 색깔입니다
+                    strokeOpacity: 0.1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+                    strokeStyle: 'solid', // 선의 스타일입니다
+                    fillColor: '#00a0e9', // 채우기 색깔입니다
+                    fillOpacity: 0.2 // 채우기 불투명도입니다
+                });
+
+                var radius = Math.round(circle.getRadius()), // 원의 반경 정보를 얻어옵니다
+                    content = getTimeHTML(radius); // 커스텀 오버레이에 표시할 반경 정보입니다
+
+                range = radius;
+
+                // 반경정보를 표시할 커스텀 오버레이를 생성합니다
+                var radiusOverlay = new daum.maps.CustomOverlay({
+                    content: content, // 표시할 내용입니다
+                    position: rClickPosition, // 표시할 위치입니다. 클릭한 위치로 설정합니다
+                    xAnchor: 0,
+                    yAnchor: 0,
+                    zIndex: 1
+                });
+
+                // 원을 지도에 표시합니다
+                circle.setMap(map);
+
+                // 선을 지도에 표시합니다
+                polyline.setMap(map);
+
+                // 반경 정보 커스텀 오버레이를 지도에 표시합니다
+                radiusOverlay.setMap(map);
+
+                // 배열에 담을 객체입니다. 원, 선, 커스텀오버레이 객체를 가지고 있습니다
+                var radiusObj = {
+                    'polyline': polyline,
+                    'circle': circle,
+                    'overlay': radiusOverlay
+                };
+
+                // 배열에 추가합니다
+                // 이 배열을 이용해서 "모두 지우기" 버튼을 클릭했을 때 지도에 그려진 원, 선, 커스텀오버레이들을 지웁니다
+                circles.push(radiusObj);
+
+                // 그리기 상태를 그리고 있지 않는 상태로 바꿉니다
+                drawingFlag = false;
+
+                // 중심 좌표를 초기화 합니다
+                centerPosition = null;
+
+                // 그려지고 있는 원, 선, 커스텀오버레이를 지도에서 제거합니다
+                drawingCircle.setMap(null);
+                drawingLine.setMap(null);
+                drawingOverlay.setMap(null);
+            }
+        });
+
+        // 지도에 표시되어 있는 모든 원과 반경정보를 표시하는 선, 커스텀 오버레이를 지도에서 제거합니다
+        function removeCircles() {
+            for (var i = 0; i < circles.length; i++) {
+                circles[i].circle.setMap(null);
+                circles[i].polyline.setMap(null);
+                circles[i].overlay.setMap(null);
+            }
+            circles = [];
+        }
+
+        // 마우스 우클릭 하여 원 그리기가 종료됐을 때 호출하여
+        // 그려진 원의 반경 정보와 반경에 대한 도보, 자전거 시간을 계산하여
+        // HTML Content를 만들어 리턴하는 함수입니다
+        function getTimeHTML(distance) {
+
+            // 도보의 시속은 평균 4km/h 이고 도보의 분속은 67m/min입니다
+            var walkkTime = distance / 67 | 0;
+            var walkHour = '',
+                walkMin = '';
+
+            // 계산한 도보 시간이 60분 보다 크면 시간으로 표시합니다
+            if (walkkTime > 60) {
+                walkHour = '<span class="number">' + Math.floor(walkkTime / 60) + '</span>시간 '
+            }
+            walkMin = '<span class="number">' + walkkTime % 60 + '</span>분'
+
+            // 자전거의 평균 시속은 16km/h 이고 이것을 기준으로 자전거의 분속은 267m/min입니다
+            var bycicleTime = distance / 227 | 0;
+            var bycicleHour = '',
+                bycicleMin = '';
+
+            // 계산한 자전거 시간이 60분 보다 크면 시간으로 표출합니다
+            if (bycicleTime > 60) {
+                bycicleHour = '<span class="number">' + Math.floor(bycicleTime / 60) + '</span>시간 '
+            }
+            bycicleMin = '<span class="number">' + bycicleTime % 60 + '</span>분'
+
+            // 거리와 도보 시간, 자전거 시간을 가지고 HTML Content를 만들어 리턴합니다
+            var content = '<ul class="info">';
+            content += '    <li>';
+            content += '        <span class="label">총거리</span><span class="number">' + distance + '</span>m';
+            content += '    </li>';
+            /*content += '    <li>';
+            content += '        <span class="label">도보</span>' + walkHour + walkMin;
+            content += '    </li>';
+            content += '    <li>';
+            content += '        <span class="label">자전거</span>' + bycicleHour + bycicleMin;
+            content += '    </li>';*/
+            content += '</ul>'
+
+            return content;
+        }
+    </script>
 </body>
 
 </html>
@@ -433,6 +733,7 @@ startWorker();
 <script type="text/javascript">
     window.onload = function() {
 
+        var set_geo = document.getElementById('set_geo');
         var request_list = document.getElementById('request_list');
         var out_admin = document.getElementById('out_admin');
         var inout_list = document.getElementById('inout_list');
@@ -504,7 +805,7 @@ startWorker();
             (function() {
                 var xhr = new XMLHttpRequest();
                 // xhr.open('GET', 'http://192.168.64.166:3000/data');
-                xhr.open('GET', 'http://112.185.119.49:3000/data');
+                xhr.open('GET', 'http://192.168.64.166:3000/data');
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         var _tzs = xhr.responseText;
@@ -518,7 +819,7 @@ startWorker();
             (function() {
                 var xhr = new XMLHttpRequest();
                 // xhr.open('GET', 'http://192.168.64.166:3000/data_user');
-                xhr.open('GET', 'http://112.185.119.49:3000/data_user');
+                xhr.open('GET', 'http://192.168.64.166:3000/data_user');
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         var _tzs = xhr.responseText;
@@ -553,7 +854,7 @@ startWorker();
                                     cell1.innerHTML = data_user[i].name + "<br>(" + data_user[i].phonenum + ")";
                                     cell2.innerHTML = data_request[j].endday + " " + data_request[j].endtime;
                                     // myLocation(data_user[i].lat, data_user[i].lon);
-                                    cell3.innerHTML = "<input type=button value=부산광역시&nbsp사상구... onclick=mymap(" + data_request[j].identifier + "," + data_user[i].lat + "," + data_user[i].lon + ") style='font-weight:bold'>";
+                                    cell3.innerHTML = "<input type=button value=현재위치... onclick=mymap(" + data_request[j].identifier + "," + data_user[i].lat + "," + data_user[i].lon + ") style='font-weight:bold'>";
                                     if (data_request[j].allow == "대기") {
                                         cell4.innerHTML = "<span style='font-weight:bold; font-size:14px'>" + data_request[j].allow + "</span>";
                                     } else if (data_request[j].allow == "승인") {
@@ -584,7 +885,7 @@ startWorker();
             (function() {
                 var xhr = new XMLHttpRequest();
                 // xhr.open('GET', 'http://192.168.64.166:3000/data_user');
-                xhr.open('GET', 'http://112.185.119.49:3000/data_user');
+                xhr.open('GET', 'http://192.168.64.166:3000/data_user');
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         var _tzs = xhr.responseText;
@@ -597,7 +898,7 @@ startWorker();
             (function() {
                 var xhr = new XMLHttpRequest();
                 // xhr.open('GET', 'http://192.168.64.166:3000/data_geofence');
-                xhr.open('GET', 'http://112.185.119.49:3000/data_geofence');
+                xhr.open('GET', 'http://192.168.64.166:3000/data_geofence');
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         var _tzs = xhr.responseText;
@@ -612,11 +913,11 @@ startWorker();
                                 cell2 = row.insertCell(1);
                                 cell3 = row.insertCell(2);
                                 for (var j = 0; j < data_user.length; j++) {
-                                    if (geofence[i].identifier == data_user[j].phonenum){
+                                    if (geofence[i].identifier == data_user[j].phonenum) {
                                         cell1.innerHTML = data_user[j].name + "<br>(" + data_user[j].phonenum + ")";
                                         cell2.innerHTML = geofence[i].onoff;
                                         cell3.innerHTML = geofence[i].time;
-                                      }
+                                    }
                                 }
 
                             }
@@ -637,7 +938,7 @@ startWorker();
             (function() {
                 var xhr = new XMLHttpRequest();
                 // xhr.open('GET', 'http://192.168.64.166:3000/data_user');
-                xhr.open('GET', 'http://112.185.119.49:3000/data_user');
+                xhr.open('GET', 'http://192.168.64.166:3000/data_user');
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         var _tzs = xhr.responseText;
@@ -687,7 +988,7 @@ startWorker();
                 var xhr = new XMLHttpRequest();
                 // var url = encodeURI('http://192.168.64.166:3000/user?name='+user_name+'&phonenum='+user_phonenum);
                 // xhr.open('POST', 'http://192.168.64.166:3000/user?name=' + user_name + '&phonenum=' + user_phonenum);
-                xhr.open('POST', 'http://112.185.119.49:3000/user?name=' + user_name + '&phonenum=' + user_phonenum);
+                xhr.open('POST', 'http://192.168.64.166:3000/user?name=' + user_name + '&phonenum=' + user_phonenum);
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         console.log("OOKK");
@@ -695,26 +996,26 @@ startWorker();
                 }
                 xhr.send();
             })();
-            if(user_name=='손원석'){
-              console.log("원석");
-              (function() {
-                  var xhr = new XMLHttpRequest();
-                  // var url = encodeURI('http://192.168.64.166:3000/user?name='+user_name+'&phonenum='+user_phonenum);
-                  // xhr.open('POST', 'http://192.168.64.166:3000/user?name=' + user_name + '&phonenum=' + user_phonenum);
-                  xhr.open('POST', 'http://112.185.119.49:3000/user_loc2?phonenum=' + user_phonenum+"&lat=35.145697&lon=129.007312");
-                  xhr.onreadystatechange = function() {
-                      if (xhr.readyState === 4 && xhr.status === 200) {
-                          console.log("OOKK");
-                      }
-                  }
-                  xhr.send();
-              })();
+            if (user_name == '손원석') {
+                console.log("원석");
+                (function() {
+                    var xhr = new XMLHttpRequest();
+                    // var url = encodeURI('http://192.168.64.166:3000/user?name='+user_name+'&phonenum='+user_phonenum);
+                    // xhr.open('POST', 'http://192.168.64.166:3000/user?name=' + user_name + '&phonenum=' + user_phonenum);
+                    xhr.open('POST', 'http://192.168.64.166:3000/user_loc2?phonenum=' + user_phonenum + "&lat=35.145697&lon=129.007312");
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState === 4 && xhr.status === 200) {
+                            console.log("OOKK");
+                        }
+                    }
+                    xhr.send();
+                })();
             }
 
             (function() {
                 var xhr = new XMLHttpRequest();
                 // xhr.open('GET', 'http://192.168.64.166:3000/data_user');
-                xhr.open('GET', 'http://112.185.119.49:3000/data_user');
+                xhr.open('GET', 'http://192.168.64.166:3000/data_user');
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         var _tzs = xhr.responseText;
@@ -753,6 +1054,43 @@ startWorker();
                 xhr.send();
             })();
             window.location.reload();
+        }
+
+        set_geo.onclick = function() {
+            delete_row5();
+            removeCircles();
+            (function() {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'http://192.168.64.166:3000/setGeoData');
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        var _tzs = xhr.responseText;
+                        geoData = JSON.parse(_tzs);
+
+                        for (var i = 0; i < geoData.length; i++) {
+                            var temp = {
+                                lat: geoData[i].lat,
+                                lon: geoData[i].lon,
+                                lastlat: geoData[i].lastlat,
+                                lastlon: geoData[i].lastlon
+                            };
+                            mytable5 = document.getElementById('mytable5');
+                            row = mytable5.insertRow(mytable5.rows.length);
+                            cell1 = row.insertCell(0);
+                            cell2 = row.insertCell(1);
+                            cell3 = row.insertCell(2);
+                            cell4 = row.insertCell(3);
+                            cell5 = row.insertCell(4);
+                            cell1.innerHTML = '<input type=button value=보기 onclick=myGeoTest(' + temp.lat + ',' + temp.lon + ',' + temp.lastlat + ',' + temp.lastlon + ')>';
+                            cell2.innerHTML = geoData[i].lat;
+                            cell3.innerHTML = geoData[i].lon;
+                            cell4.innerHTML = geoData[i].radius + 'M';
+                            cell5.innerHTML = '<input type=button value=삭제>';
+                        }
+                    }
+                }
+                xhr.send();
+            })();
         }
 
         /*request_state.onclick = function() {
@@ -826,10 +1164,10 @@ startWorker();
     }
 
     function delete_user(phonenum) {
-      console.log(phonenum);
+        console.log(phonenum);
         var xhr = new XMLHttpRequest();
         // xhr.open('POST', 'http://192.168.64.166:3000/user_delete?phonenum=' + phonenum);
-        xhr.open('POST', 'http://112.185.119.49:3000/user_delete?phonenum=' + "0"+phonenum);
+        xhr.open('POST', 'http://192.168.64.166:3000/user_delete?phonenum=' + "0" + phonenum);
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 console.log("OK");
@@ -838,7 +1176,7 @@ startWorker();
         xhr.send();
 
         var xhr2 = new XMLHttpRequest();
-        xhr2.open('POST', 'http://112.185.119.49:3000/user_delete2?phonenum=' + "0"+phonenum);
+        xhr2.open('POST', 'http://192.168.64.166:3000/user_delete2?phonenum=' + "0" + phonenum);
         xhr2.onreadystatechange = function() {
             if (xhr2.readyState === 4 && xhr2.status === 200) {
                 console.log("OK");
@@ -847,7 +1185,7 @@ startWorker();
         xhr2.send();
 
         var xhr3 = new XMLHttpRequest();
-        xhr3.open('POST', 'http://112.185.119.49:3000/user_delete3?phonenum=' + "0"+phonenum);
+        xhr3.open('POST', 'http://192.168.64.166:3000/user_delete3?phonenum=' + "0" + phonenum);
         xhr3.onreadystatechange = function() {
             if (xhr3.readyState === 4 && xhr3.status === 200) {
                 console.log("OK");
@@ -862,9 +1200,36 @@ startWorker();
         console.log(lat);
         console.log(lon);
         // var popUrl = "http://192.168.64.166:3000/map?identifier=" + identifier + "&lat=" + lat + "&lon=" + lon; //팝업창에 출력될 페이지 URL
-        var popUrl = "http://112.185.119.49:3000/map?identifier=" + identifier + "&lat=" + lat + "&lon=" + lon; //팝업창에 출력될 페이지 URL
-        var popOption = "width=1000, height=700, resizable=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
+        var popUrl = "http://192.168.64.166:3000/map?identifier=" + identifier + "&lat=" + lat + "&lon=" + lon; //팝업창에 출력될 페이지 URL
+        var popOption = "width=950, height=700, resizable=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
         window.open(popUrl, "", popOption);
+    }
+
+    function geoMap() {
+        if (lat != 0 && lon != 0 && range != 0 && lastlat != 0 && lastlon != 0) {
+            console.log("lat=" + lat);
+            console.log("lon=" + lon);
+            console.log("lat=" + lastlat);
+            console.log("lon=" + lastlon);
+            console.log("range=" + range);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'http://192.168.64.166:3000/setGeo?lat=' + lat + '&lon=' + lon + '&range=' + range + '&lastlat=' + lastlat + '&lastlon=' + lastlon);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log("OK");
+                }
+            }
+            xhr.send();
+
+            lat = 0;
+            lon = 0;
+            lastlat = 0;
+            lastlon = 0;
+            range = 0;
+        } else {
+            console.log("geoMap() error");
+        }
     }
 
     function delete_row() {
@@ -906,6 +1271,294 @@ startWorker();
             console.log("삭제");
         }
     }
+
+    function delete_row5() {
+        mytable5 = document.getElementById('mytable5');
+        var temp = mytable5.rows.length;
+        console.log("length" + mytable5.rows.length);
+        for (var i = 0; i < temp - 1; i++) {
+            mytable5.deleteRow(mytable5.rows.length - 1);
+            console.log("삭제");
+        }
+    }
+</script>
+
+<script>
+    function myGeoTest(_lat, _lon, lastlat, lastlon) {
+        console.log(_lat);
+        console.log(_lon);
+        console.log(lastlat);
+        console.log(lastlon);
+        var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+            mapOption = {
+                center: new daum.maps.LatLng(_lat, _lon), // 지도의 중심좌표
+                level: 2 // 지도의 확대 레벨
+            };
+        // var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+        var locFlag = false;
+        var lat = 0;
+        var lon = 0;
+        var range = 0;
+        var drawingFlag = false; // 원이 그려지고 있는 상태를 가지고 있을 변수입니다
+        var centerPosition; // 원의 중심좌표 입니다
+        var drawingCircle; // 그려지고 있는 원을 표시할 원 객체입니다
+        var drawingLine; // 그려지고 있는 원의 반지름을 표시할 선 객체입니다
+        var drawingOverlay; // 그려지고 있는 원의 반경을 표시할 커스텀오버레이 입니다
+        var drawingDot; // 그려지고 있는 원의 중심점을 표시할 커스텀오버레이 입니다
+
+        var circles = []; // 클릭으로 그려진 원과 반경 정보를 표시하는 선과 커스텀오버레이를 가지고 있을 배열입니다
+
+        // 지도에 클릭 이벤트를 등록합니다
+        // daum.maps.event.addListener(map, 'click', function(mouseEvent) {
+
+        // 클릭 이벤트가 발생했을 때 원을 그리고 있는 상태가 아니면 중심좌표를 클릭한 지점으로 설정합니다
+        // if (!drawingFlag) {
+
+        // 상태를 그리고있는 상태로 변경합니다
+        drawingFlag = true;
+
+        // 원이 그려질 중심좌표를 클릭한 위치로 설정합니다
+        // centerPosition = mouseEvent.latLng;
+        centerPosition = new daum.maps.LatLng(_lat, _lon);
+        // 그려지고 있는 원의 반경을 표시할 선 객체를 생성합니다
+        if (!drawingLine) {
+            drawingLine = new daum.maps.Polyline({
+                strokeWeight: 3, // 선의 두께입니다
+                strokeColor: '#00a0e9', // 선의 색깔입니다
+                strokeOpacity: 1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+                strokeStyle: 'solid' // 선의 스타일입니다
+            });
+        }
+
+        // 그려지고 있는 원을 표시할 원 객체를 생성합니다
+        if (!drawingCircle) {
+            drawingCircle = new daum.maps.Circle({
+                strokeWeight: 1, // 선의 두께입니다
+                strokeColor: '#00a0e9', // 선의 색깔입니다
+                strokeOpacity: 0.1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+                strokeStyle: 'solid', // 선의 스타일입니다
+                fillColor: '#00a0e9', // 채우기 색깔입니다
+                fillOpacity: 0.2 // 채우기 불투명도입니다
+            });
+        }
+
+        // 그려지고 있는 원의 반경 정보를 표시할 커스텀오버레이를 생성합니다
+        if (!drawingOverlay) {
+            drawingOverlay = new daum.maps.CustomOverlay({
+                xAnchor: 0,
+                yAnchor: 0,
+                zIndex: 1
+            });
+        }
+        // }
+        // });
+
+        // 지도에 마우스무브 이벤트를 등록합니다
+        // 원을 그리고있는 상태에서 마우스무브 이벤트가 발생하면 그려질 원의 위치와 반경정보를 동적으로 보여주도록 합니다
+        // daum.maps.event.addListener(map, 'mousemove', function(mouseEvent) {
+
+        // 마우스무브 이벤트가 발생했을 때 원을 그리고있는 상태이면
+        if (drawingFlag) {
+
+            // 마우스 커서의 현재 위치를 얻어옵니다
+            var mousePosition = new daum.maps.LatLng(lat, lon);
+            // var mousePosition = mouseEvent.latLng;
+            /*console.log(mousePosition.ib);
+            console.log(mousePosition.hb);
+            if (!locFlag) {
+                removeCircles();
+                lat = mousePosition.ib;
+                lon = mousePosition.hb;
+                locFlag = true;
+            }*/
+
+            // 그려지고 있는 선을 표시할 좌표 배열입니다. 클릭한 중심좌표와 마우스커서의 위치로 설정합니다
+            var linePath = [centerPosition, mousePosition];
+
+            // 그려지고 있는 선을 표시할 선 객체에 좌표 배열을 설정합니다
+            drawingLine.setPath(linePath);
+
+            // 원의 반지름을 선 객체를 이용해서 얻어옵니다
+            var length = drawingLine.getLength();
+
+            if (length > 0) {
+
+                // 그려지고 있는 원의 중심좌표와 반지름입니다
+                var circleOptions = {
+                    center: centerPosition,
+                    radius: length,
+                };
+
+                // 그려지고 있는 원의 옵션을 설정합니다
+                drawingCircle.setOptions(circleOptions);
+
+                // 반경 정보를 표시할 커스텀오버레이의 내용입니다
+                var radius = Math.round(drawingCircle.getRadius()),
+                    content = '<div class="info">반경 <span class="number">' + radius + '</span>m</div>';
+
+                // 반경 정보를 표시할 커스텀 오버레이의 좌표를 마우스커서 위치로 설정합니다
+                drawingOverlay.setPosition(mousePosition);
+
+                // 반경 정보를 표시할 커스텀 오버레이의 표시할 내용을 설정합니다
+                drawingOverlay.setContent(content);
+
+                // 그려지고 있는 원을 지도에 표시합니다
+                drawingCircle.setMap(map);
+
+                // 그려지고 있는 선을 지도에 표시합니다
+                drawingLine.setMap(map);
+
+                // 그려지고 있는 원의 반경정보 커스텀 오버레이를 지도에 표시합니다
+                drawingOverlay.setMap(map);
+
+            } else {
+
+                drawingCircle.setMap(null);
+                drawingLine.setMap(null);
+                drawingOverlay.setMap(null);
+
+            }
+        }
+        // });
+
+        // 지도에 마우스 오른쪽 클릭이벤트를 등록합니다
+        // 원을 그리고있는 상태에서 마우스 오른쪽 클릭 이벤트가 발생하면
+        // 마우스 오른쪽 클릭한 위치를 기준으로 원과 원의 반경정보를 표시하는 선과 커스텀 오버레이를 표시하고 그리기를 종료합니다
+        // daum.maps.event.addListener(map, 'rightclick', function(mouseEvent) {
+
+        if (drawingFlag) {
+            locFlag = false;
+            // 마우스로 오른쪽 클릭한 위치입니다
+            var rClickPosition = new daum.maps.LatLng(lastlat, lastlon);
+
+            // 원의 반경을 표시할 선 객체를 생성합니다
+            var polyline = new daum.maps.Polyline({
+
+                path: [centerPosition, rClickPosition], // 선을 구성하는 좌표 배열입니다. 원의 중심좌표와 클릭한 위치로 설정합니다
+                strokeWeight: 3, // 선의 두께 입니다
+                strokeColor: '#00a0e9', // 선의 색깔입니다
+                strokeOpacity: 1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+                strokeStyle: 'solid' // 선의 스타일입니다
+            });
+
+            console.log(centerPosition);
+            console.log(rClickPosition);
+
+            // 원 객체를 생성합니다
+            var circle = new daum.maps.Circle({
+                center: centerPosition, // 원의 중심좌표입니다
+                radius: polyline.getLength(), // 원의 반지름입니다 m 단위 이며 선 객체를 이용해서 얻어옵니다
+                strokeWeight: 1, // 선의 두께입니다
+                strokeColor: '#00a0e9', // 선의 색깔입니다
+                strokeOpacity: 0.1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+                strokeStyle: 'solid', // 선의 스타일입니다
+                fillColor: '#00a0e9', // 채우기 색깔입니다
+                fillOpacity: 0.2 // 채우기 불투명도입니다
+            });
+
+            var radius = Math.round(circle.getRadius()), // 원의 반경 정보를 얻어옵니다
+                content = getTimeHTML(radius); // 커스텀 오버레이에 표시할 반경 정보입니다
+
+            range = radius;
+
+            // 반경정보를 표시할 커스텀 오버레이를 생성합니다
+            var radiusOverlay = new daum.maps.CustomOverlay({
+                content: content, // 표시할 내용입니다
+                position: rClickPosition, // 표시할 위치입니다. 클릭한 위치로 설정합니다
+                xAnchor: 0,
+                yAnchor: 0,
+                zIndex: 1
+            });
+
+            // 원을 지도에 표시합니다
+            circle.setMap(map);
+
+            // 선을 지도에 표시합니다
+            polyline.setMap(map);
+
+            // 반경 정보 커스텀 오버레이를 지도에 표시합니다
+            radiusOverlay.setMap(map);
+
+            // 배열에 담을 객체입니다. 원, 선, 커스텀오버레이 객체를 가지고 있습니다
+            var radiusObj = {
+                'polyline': polyline,
+                'circle': circle,
+                'overlay': radiusOverlay
+            };
+
+            // 배열에 추가합니다
+            // 이 배열을 이용해서 "모두 지우기" 버튼을 클릭했을 때 지도에 그려진 원, 선, 커스텀오버레이들을 지웁니다
+            circles.push(radiusObj);
+
+            // 그리기 상태를 그리고 있지 않는 상태로 바꿉니다
+            drawingFlag = false;
+
+            // 중심 좌표를 초기화 합니다
+            centerPosition = null;
+
+            // 그려지고 있는 원, 선, 커스텀오버레이를 지도에서 제거합니다
+            drawingCircle.setMap(null);
+            drawingLine.setMap(null);
+            drawingOverlay.setMap(null);
+
+            drawingFlag = false;
+        }
+        // });
+    }
+
+    // 지도에 표시되어 있는 모든 원과 반경정보를 표시하는 선, 커스텀 오버레이를 지도에서 제거합니다
+    function removeCircles2() {
+        for (var i = 0; i < circles.length; i++) {
+            circles[i].circle.setMap(null);
+            circles[i].polyline.setMap(null);
+            circles[i].overlay.setMap(null);
+        }
+        circles = [];
+    }
+
+    // 마우스 우클릭 하여 원 그리기가 종료됐을 때 호출하여
+    // 그려진 원의 반경 정보와 반경에 대한 도보, 자전거 시간을 계산하여
+    // HTML Content를 만들어 리턴하는 함수입니다
+    function getTimeHTML(distance) {
+
+        // 도보의 시속은 평균 4km/h 이고 도보의 분속은 67m/min입니다
+        var walkkTime = distance / 67 | 0;
+        var walkHour = '',
+            walkMin = '';
+
+        // 계산한 도보 시간이 60분 보다 크면 시간으로 표시합니다
+        if (walkkTime > 60) {
+            walkHour = '<span class="number">' + Math.floor(walkkTime / 60) + '</span>시간 '
+        }
+        walkMin = '<span class="number">' + walkkTime % 60 + '</span>분'
+
+        // 자전거의 평균 시속은 16km/h 이고 이것을 기준으로 자전거의 분속은 267m/min입니다
+        var bycicleTime = distance / 227 | 0;
+        var bycicleHour = '',
+            bycicleMin = '';
+
+        // 계산한 자전거 시간이 60분 보다 크면 시간으로 표출합니다
+        if (bycicleTime > 60) {
+            bycicleHour = '<span class="number">' + Math.floor(bycicleTime / 60) + '</span>시간 '
+        }
+        bycicleMin = '<span class="number">' + bycicleTime % 60 + '</span>분'
+
+        // 거리와 도보 시간, 자전거 시간을 가지고 HTML Content를 만들어 리턴합니다
+        var content = '<ul class="info">';
+        content += '    <li>';
+        content += '        <span class="label">총거리</span><span class="number">' + distance + '</span>m';
+        content += '    </li>';
+        /*content += '    <li>';
+        content += '        <span class="label">도보</span>' + walkHour + walkMin;
+        content += '    </li>';
+        content += '    <li>';
+        content += '        <span class="label">자전거</span>' + bycicleHour + bycicleMin;
+        content += '    </li>';*/
+        content += '</ul>'
+
+        return content;
+    }
 </script>
 
 <script type="text/javascript">
@@ -946,7 +1599,8 @@ startWorker();
     #mytable,
     #mytable2,
     #mytable3,
-    #mytable4 {
+    #mytable4,
+    #mytable5 {
         text-align: center;
     }
 
@@ -1029,5 +1683,38 @@ startWorker();
         width: 100%;
         margin: 0 auto;
         text-align: center;
+    }
+
+
+
+
+
+    .info {
+        position: relative;
+        top: 5px;
+        left: 5px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        border-bottom: 2px solid #ddd;
+        font-size: 12px;
+        padding: 5px;
+        background: #fff;
+        list-style: none;
+        margin: 0;
+    }
+
+    .info:nth-of-type(n) {
+        border: 0;
+        box-shadow: 0px 1px 2px #888;
+    }
+
+    .info .label {
+        display: inline-block;
+        width: 50px;
+    }
+
+    .number {
+        font-weight: bold;
+        color: #00a0e9;
     }
 </style>

@@ -49,6 +49,12 @@ app.get(['/map'], function(req, res) {
     });
 });
 
+app.get(['/geomap'], function(req, res) {
+    res.render('geomap', {
+
+    });
+});
+
 app.get(['/myWorker'], function(req, res) {
 
 
@@ -279,6 +285,37 @@ app.get(['/geofence'], function(req, res) {
             console.log(err);
         } else {
             res.send("OK");
+        }
+    });
+});
+
+app.post(['/setGeo'], function(req, res) {
+    var lat = req.query.lat;
+    var lon = req.query.lon;
+    var lastlat = req.query.lastlat;
+    var lastlon = req.query.lastlon;
+    var range = req.query.range;
+    console.log(lat);
+    console.log(lon);
+    console.log(range);
+    var sql = 'INSERT INTO mygeo (lat, lon, radius, lastlat, lastlon) VALUES(?, ?, ?, ?, ?)';
+    var params = [lat, lon, range, lastlat, lastlon];
+    conn.query(sql, params, function(err, rows, fields) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send("OK");
+        }
+    });
+});
+
+app.get(['/setGeoData'], function(req, res) {
+    var sql = 'SELECT * FROM mygeo';
+    conn.query(sql, function(err, rows, fields) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send(rows);
         }
     });
 });
