@@ -267,6 +267,20 @@ app.post(['/user_delete3'], function(req, res) {
     });
 });
 
+app.post(['/geo_delete'], function(req, res) {
+    var id = req.query.id;
+    console.log(id);
+    var sql = 'DELETE from mygeo WHERE id=?';
+    var params = [id];
+    conn.query(sql, params, function(err, rows, fields) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send("OK");
+        }
+    });
+});
+
 app.get(['/geofence'], function(req, res) {
     var identifier = req.query.identifier;
     var onoff = req.query.onoff;

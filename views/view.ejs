@@ -10,21 +10,21 @@
 
 <script type="text/javascript">
     /*
-                                                                            var w;
+                                                                                                                                                var w;
 
-                                                                            function startWorker() {
-                                                                            if(window.Worker){
-                                                                                    w = new Worker("myWorker.js");
-                                                                                    w.onmessage = function(event) {
-                                                                                        alert(event.data);
-                                                                                    };
-                                                                            }
-                                                                            else{
-                                                                                alert('Web worker를 지원하지 않는 브라우저 입니다!');
-                                                                            }
-                                                                            }
-                                                                            startWorker();
-                                                                            */
+                                                                                                                                                function startWorker() {
+                                                                                                                                                if(window.Worker){
+                                                                                                                                                        w = new Worker("myWorker.js");
+                                                                                                                                                        w.onmessage = function(event) {
+                                                                                                                                                            alert(event.data);
+                                                                                                                                                        };
+                                                                                                                                                }
+                                                                                                                                                else{
+                                                                                                                                                    alert('Web worker를 지원하지 않는 브라우저 입니다!');
+                                                                                                                                                }
+                                                                                                                                                }
+                                                                                                                                                startWorker();
+                                                                                                                                                */
     (function() {
         var xhr = new XMLHttpRequest();
         // xhr.open('GET', 'http://192.168.64.166:3000/data_user');
@@ -428,13 +428,12 @@
                     <div id="tab5" class="tab_content">
                         <br>
                         <div class="search5" width="100%" align="center">
-                            <div id="map" style="width:100%;height:350px;"></div>
+                            <div id="map" style="width:95%;height:400px;"></div>
                             <br>
                             <!-- <button onclick="removeCircles()">모두 지우기</button> -->
 
                             <input type="button" name="" value="추가" id="" onclick="geoMap()"></input>
-                            <input type="button" name="" value="테스트" id="" onclick="myGeoTest()"></input>
-                            <input type="button" name="" value="삭제" id="" onclick="removeCircles2()"></input>
+                            <input type="button" name="" value="지도초기화" id="" onclick="removeCircles()"></input>
 
                         </div>
                         <br>
@@ -460,8 +459,8 @@
     <script>
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div
             mapOption = {
-                center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-                level: 2 // 지도의 확대 레벨
+                center: new daum.maps.LatLng(35.145338, 129.007827), // 지도의 중심좌표
+                level: 3 // 지도의 확대 레벨
             };
 
         var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -675,6 +674,12 @@
 
         // 지도에 표시되어 있는 모든 원과 반경정보를 표시하는 선, 커스텀 오버레이를 지도에서 제거합니다
         function removeCircles() {
+          lat = 0;
+          lon = 0;
+          lastlat = 0;
+          lastlon = 0;
+          range = 0;
+
             for (var i = 0; i < circles.length; i++) {
                 circles[i].circle.setMap(null);
                 circles[i].polyline.setMap(null);
@@ -854,7 +859,7 @@
                                     cell1.innerHTML = data_user[i].name + "<br>(" + data_user[i].phonenum + ")";
                                     cell2.innerHTML = data_request[j].endday + " " + data_request[j].endtime;
                                     // myLocation(data_user[i].lat, data_user[i].lon);
-                                    cell3.innerHTML = "<input type=button value=현재위치... onclick=mymap(" + data_request[j].identifier + "," + data_user[i].lat + "," + data_user[i].lon + ") style='font-weight:bold'>";
+                                    cell3.innerHTML = "<input type=button value=현재위치... onclick=mymap(" + data_request[j].identifier + "," + data_user[i].lat + "," + data_user[i].lon + ")'>";
                                     if (data_request[j].allow == "대기") {
                                         cell4.innerHTML = "<span style='font-weight:bold; font-size:14px'>" + data_request[j].allow + "</span>";
                                     } else if (data_request[j].allow == "승인") {
@@ -970,7 +975,7 @@
                             } else {
                                 cell4.innerHTML = '알수없음';
                             }
-                            cell5.innerHTML = '<input type=button value=삭제 onclick=delete_user(' + user[i].phonenum + ') style="font-weight:bold"></input>';
+                            cell5.innerHTML = '<input type=button value=삭제 onclick=delete_user(' + user[i].phonenum + ')"></input>';
                         }
                     }
                 }
@@ -1072,7 +1077,8 @@
                                 lat: geoData[i].lat,
                                 lon: geoData[i].lon,
                                 lastlat: geoData[i].lastlat,
-                                lastlon: geoData[i].lastlon
+                                lastlon: geoData[i].lastlon,
+                                radius: geoData[i].radius
                             };
                             mytable5 = document.getElementById('mytable5');
                             row = mytable5.insertRow(mytable5.rows.length);
@@ -1081,11 +1087,11 @@
                             cell3 = row.insertCell(2);
                             cell4 = row.insertCell(3);
                             cell5 = row.insertCell(4);
-                            cell1.innerHTML = '<input type=button value=보기 onclick=myGeoTest(' + temp.lat + ',' + temp.lon + ',' + temp.lastlat + ',' + temp.lastlon + ')>';
+                            cell1.innerHTML = '<input type=button value=보기 onclick=myGeoTest(' + temp.lat + ',' + temp.lon + ',' + temp.lastlat + ',' + temp.lastlon + ',' + temp.radius + ')>';
                             cell2.innerHTML = geoData[i].lat;
                             cell3.innerHTML = geoData[i].lon;
                             cell4.innerHTML = geoData[i].radius + 'M';
-                            cell5.innerHTML = '<input type=button value=삭제>';
+                            cell5.innerHTML = '<input type=button value=삭제 onclick=deleteGeo(' + geoData[i].id + ')>';
                         }
                     }
                 }
@@ -1213,20 +1219,16 @@
             console.log("lon=" + lastlon);
             console.log("range=" + range);
 
+
             var xhr = new XMLHttpRequest();
             xhr.open('POST', 'http://192.168.64.166:3000/setGeo?lat=' + lat + '&lon=' + lon + '&range=' + range + '&lastlat=' + lastlat + '&lastlon=' + lastlon);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     console.log("OK");
+                    removeCircles();
                 }
             }
             xhr.send();
-
-            lat = 0;
-            lon = 0;
-            lastlat = 0;
-            lastlon = 0;
-            range = 0;
         } else {
             console.log("geoMap() error");
         }
@@ -1284,17 +1286,53 @@
 </script>
 
 <script>
-    function myGeoTest(_lat, _lon, lastlat, lastlon) {
+    function deleteGeo(id) {
+        console.log(id);
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'http://192.168.64.166:3000/geo_delete?id=' + id);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+
+            }
+        }
+        xhr.send();
+    }
+
+    function myGeoTest(_lat, _lon, lastlat, lastlon, radius) {
         console.log(_lat);
         console.log(_lon);
         console.log(lastlat);
         console.log(lastlon);
-        var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+        console.log(radius);
+        var myZoom = 0;
+        if (radius < 50) {
+            myZoom = 2;
+        } else if (radius < 100) {
+            myZoom = 3;
+        } else if (radius < 200) {
+            myZoom = 4;
+        } else if (radius < 400) {
+            myZoom = 5;
+        } else if (radius < 900) {
+            myZoom = 6;
+        } else if (radius < 2100) {
+            myZoom = 7;
+        } else if (radius < 4500) {
+            myZoom = 8;
+        } else {
+            myZoom = 10;
+        }
+        removeCircles();
+        /*mapContainer = document.getElementById('map'), // 지도를 표시할 div
             mapOption = {
                 center: new daum.maps.LatLng(_lat, _lon), // 지도의 중심좌표
-                level: 2 // 지도의 확대 레벨
-            };
+                level: myZoom // 지도의 확대 레벨
+            };*/
         // var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+        var moveLatLon = new daum.maps.LatLng(_lat, _lon);
+        map.setLevel(myZoom);
+        map.panTo(moveLatLon);
 
         var locFlag = false;
         var lat = 0;
@@ -1307,7 +1345,7 @@
         var drawingOverlay; // 그려지고 있는 원의 반경을 표시할 커스텀오버레이 입니다
         var drawingDot; // 그려지고 있는 원의 중심점을 표시할 커스텀오버레이 입니다
 
-        var circles = []; // 클릭으로 그려진 원과 반경 정보를 표시하는 선과 커스텀오버레이를 가지고 있을 배열입니다
+        circles = []; // 클릭으로 그려진 원과 반경 정보를 표시하는 선과 커스텀오버레이를 가지고 있을 배열입니다
 
         // 지도에 클릭 이벤트를 등록합니다
         // daum.maps.event.addListener(map, 'click', function(mouseEvent) {
@@ -1321,6 +1359,7 @@
         // 원이 그려질 중심좌표를 클릭한 위치로 설정합니다
         // centerPosition = mouseEvent.latLng;
         centerPosition = new daum.maps.LatLng(_lat, _lon);
+
         // 그려지고 있는 원의 반경을 표시할 선 객체를 생성합니다
         if (!drawingLine) {
             drawingLine = new daum.maps.Polyline({
@@ -1505,17 +1544,19 @@
             drawingFlag = false;
         }
         // });
+
+
     }
 
     // 지도에 표시되어 있는 모든 원과 반경정보를 표시하는 선, 커스텀 오버레이를 지도에서 제거합니다
-    function removeCircles2() {
+    /*function removeCircles2() {
         for (var i = 0; i < circles.length; i++) {
             circles[i].circle.setMap(null);
             circles[i].polyline.setMap(null);
             circles[i].overlay.setMap(null);
         }
         circles = [];
-    }
+    }*/
 
     // 마우스 우클릭 하여 원 그리기가 종료됐을 때 호출하여
     // 그려진 원의 반경 정보와 반경에 대한 도보, 자전거 시간을 계산하여

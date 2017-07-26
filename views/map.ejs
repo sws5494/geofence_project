@@ -90,7 +90,6 @@
                             console.log(data_user2.old.name);
                             infowindow.close();
 
-
                             iwContent = '<div style="padding:10px;font-weight:bold">' + phonenum[0] + " / " + data_user2.old.name + '</div>',
                                 iwRemoveable = true;
 
@@ -113,7 +112,7 @@
                     var moveLatLon = new daum.maps.LatLng(data_user[i].lat, data_user[i].lon);
                     // 지도 중심을 부드럽게 이동시킵니다
                     // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
-                    map.panTo(moveLatLon);
+                    map.setCenter(moveLatLon);
 
                     marker.setMap(map);
                 }
@@ -122,8 +121,6 @@
 
         function add_item(name, identifier) {
             console.log("ADD");
-            // pre_set 에 있는 내용을 읽어와서 처리..
-
             var myId = document.getElementById('myId');
             document.getElementById('myId').value = name + "/" + identifier;
             var div = document.createElement('div');
@@ -164,8 +161,7 @@
 
         (function() {
             var xhr = new XMLHttpRequest();
-            // xhr.open('GET', 'http://192.168.64.166:3000/data_user');
-            xhr.open('GET', 'http://112.185.119.49:3000/data_user');
+            xhr.open('GET', 'http://192.168.64.166:3000/data_user');
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     var _tzs = xhr.responseText;
