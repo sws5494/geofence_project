@@ -10,21 +10,21 @@
 
 <script type="text/javascript">
     /*
-                                                                                                                                                var w;
+                                                                                                                                                    var w;
 
-                                                                                                                                                function startWorker() {
-                                                                                                                                                if(window.Worker){
-                                                                                                                                                        w = new Worker("myWorker.js");
-                                                                                                                                                        w.onmessage = function(event) {
-                                                                                                                                                            alert(event.data);
-                                                                                                                                                        };
-                                                                                                                                                }
-                                                                                                                                                else{
-                                                                                                                                                    alert('Web worker를 지원하지 않는 브라우저 입니다!');
-                                                                                                                                                }
-                                                                                                                                                }
-                                                                                                                                                startWorker();
-                                                                                                                                                */
+                                                                                                                                                    function startWorker() {
+                                                                                                                                                    if(window.Worker){
+                                                                                                                                                            w = new Worker("myWorker.js");
+                                                                                                                                                            w.onmessage = function(event) {
+                                                                                                                                                                alert(event.data);
+                                                                                                                                                            };
+                                                                                                                                                    }
+                                                                                                                                                    else{
+                                                                                                                                                        alert('Web worker를 지원하지 않는 브라우저 입니다!');
+                                                                                                                                                    }
+                                                                                                                                                    }
+                                                                                                                                                    startWorker();
+                                                                                                                                                    */
     (function() {
         var xhr = new XMLHttpRequest();
         // xhr.open('GET', 'http://192.168.64.166:3000/data_user');
@@ -338,11 +338,11 @@
                         <br>
                         <table width="95%" height="80%" align="center" id="mytable">
                             <tr id="myTr" align="center" style="background:#3B5998;color:#FFFFFF;font-size:14px;font-weight:bold">
-                                <td width="10%">이름(전화번호)</td>
+                                <td width="8%">이름(전화번호)</td>
                                 <td width="10%">시작시간</td>
                                 <td width="10%">종료시간</td>
                                 <td width="5%">사유</td>
-                                <td width="10%">신청시간</td>
+                                <td width="12%">신청시간</td>
                                 <td width="5%">상태</td>
                             </tr>
                         </table>
@@ -407,8 +407,8 @@
                     <div id="tab4" class="tab_content">
                         <br>
                         <div class="search3" width="100%" align="center">
-                            <input type="text" name="" value="이름" id="user_name"></input>
-                            <input type="text" name="" value="전화번호" id="user_phonenum"></input>
+                            <input type="text" name="" placeholder="이름" id="user_name"></input>
+                            <input type="text" name="" placeholder="전화번호" id="user_phonenum"></input>
                             <input type="button" name="" value="추가" id="user_add"></input>
                         </div>
                         <br>
@@ -534,12 +534,13 @@
 
                 // 마우스 커서의 현재 위치를 얻어옵니다
                 var mousePosition = mouseEvent.latLng;
-                console.log(mousePosition.ib);
+                console.log(mousePosition);
+                console.log(mousePosition.gb);
                 console.log(mousePosition.hb);
                 if (!locFlag) {
                     removeCircles();
-                    lat = mousePosition.ib;
-                    lon = mousePosition.hb;
+                    lat = mousePosition.hb;
+                    lon = mousePosition.gb;
                     locFlag = true;
                 }
 
@@ -601,9 +602,9 @@
                 locFlag = false;
                 // 마우스로 오른쪽 클릭한 위치입니다
                 var rClickPosition = mouseEvent.latLng;
-                // console.log(rClickPosition);
-                lastlat = rClickPosition.ib;
-                lastlon = rClickPosition.hb;
+                console.log(rClickPosition);
+                lastlat = rClickPosition.hb;
+                lastlon = rClickPosition.gb;
                 // 원의 반경을 표시할 선 객체를 생성합니다
                 var polyline = new daum.maps.Polyline({
                     path: [centerPosition, rClickPosition], // 선을 구성하는 좌표 배열입니다. 원의 중심좌표와 클릭한 위치로 설정합니다
@@ -674,11 +675,11 @@
 
         // 지도에 표시되어 있는 모든 원과 반경정보를 표시하는 선, 커스텀 오버레이를 지도에서 제거합니다
         function removeCircles() {
-          lat = 0;
-          lon = 0;
-          lastlat = 0;
-          lastlon = 0;
-          range = 0;
+            lat = 0;
+            lon = 0;
+            lastlat = 0;
+            lastlon = 0;
+            range = 0;
 
             for (var i = 0; i < circles.length; i++) {
                 circles[i].circle.setMap(null);
@@ -859,7 +860,7 @@
                                     cell1.innerHTML = data_user[i].name + "<br>(" + data_user[i].phonenum + ")";
                                     cell2.innerHTML = data_request[j].endday + " " + data_request[j].endtime;
                                     // myLocation(data_user[i].lat, data_user[i].lon);
-                                    cell3.innerHTML = "<input type=button value=현재위치... onclick=mymap(" + data_request[j].identifier + "," + data_user[i].lat + "," + data_user[i].lon + ")'>";
+                                    cell3.innerHTML = "<input type=button value=현재위치... onclick=mymap(" + data_request[j].identifier + "," + data_user[i].lat + "," + data_user[i].lon + ")>";
                                     if (data_request[j].allow == "대기") {
                                         cell4.innerHTML = "<span style='font-weight:bold; font-size:14px'>" + data_request[j].allow + "</span>";
                                     } else if (data_request[j].allow == "승인") {
@@ -1219,7 +1220,6 @@
             console.log("lon=" + lastlon);
             console.log("range=" + range);
 
-
             var xhr = new XMLHttpRequest();
             xhr.open('POST', 'http://192.168.64.166:3000/setGeo?lat=' + lat + '&lon=' + lon + '&range=' + range + '&lastlat=' + lastlat + '&lastlon=' + lastlon);
             xhr.onreadystatechange = function() {
@@ -1299,6 +1299,7 @@
     }
 
     function myGeoTest(_lat, _lon, lastlat, lastlon, radius) {
+      removeCircles();
         console.log(_lat);
         console.log(_lon);
         console.log(lastlat);
@@ -1322,7 +1323,8 @@
         } else {
             myZoom = 10;
         }
-        removeCircles();
+
+
         /*mapContainer = document.getElementById('map'), // 지도를 표시할 div
             mapOption = {
                 center: new daum.maps.LatLng(_lat, _lon), // 지도의 중심좌표
@@ -1331,6 +1333,7 @@
         // var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
         var moveLatLon = new daum.maps.LatLng(_lat, _lon);
+        console.log(moveLatLon);
         map.setLevel(myZoom);
         map.panTo(moveLatLon);
 
