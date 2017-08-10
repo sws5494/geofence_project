@@ -5,26 +5,46 @@
     <meta charset="utf-8">
     <title></title>
 </head>
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=b71237800fad9424af97a5aeba4c0a38&libraries=services"></script>
 
-<script type="text/javascript">
-    /*
-                                                                                                                                                    var w;
+<!-- 날짜선택 -->
+<link rel="stylesheet" href="./css/bootstrap.min.css" />
+<!-- <link rel="stylesheet" href="./css/material.min.css" /> -->
+<link rel="stylesheet" href="./css/bootstrap-material-datetimepicker.css" />
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-                                                                                                                                                    function startWorker() {
-                                                                                                                                                    if(window.Worker){
-                                                                                                                                                            w = new Worker("myWorker.js");
-                                                                                                                                                            w.onmessage = function(event) {
-                                                                                                                                                                alert(event.data);
-                                                                                                                                                            };
-                                                                                                                                                    }
-                                                                                                                                                    else{
-                                                                                                                                                        alert('Web worker를 지원하지 않는 브라우저 입니다!');
-                                                                                                                                                    }
-                                                                                                                                                    }
-                                                                                                                                                    startWorker();
-                                                                                                                                                    */
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript" src="./js/bootstrap.min.js"></script>
+<script type="text/javascript" src="./js/material.min.js"></script>
+<script type="text/javascript" src="./js/moment-with-locales.min.js"></script>
+<script type="text/javascript" src="./js/bootstrap-material-datetimepicker.js"></script>
+
+<script type="text/javascript">
+    //날짜 선택
+    $(document).ready(function() {
+			$('#date').bootstrapMaterialDatePicker({
+				time: false
+			});
+
+      $('#date2').bootstrapMaterialDatePicker({
+        time: false
+      });
+			$.material.init()
+		});
+
+
+    /**
+        var w; function startWorker() { if (window.Worker) { w = new Worker("myWorker.js"); w.onmessage = function(event) { alert(event.data); }; } else { alert('Web worker를 지원하지 않는 브라우저 입니다!'); } } startWorker();
+    **/
+
     (function() {
         var xhr = new XMLHttpRequest();
         // xhr.open('GET', 'http://192.168.64.166:3000/data_user');
@@ -322,18 +342,12 @@
                         <br>
                         <div class="search" width="70%" align="center">
                             <select id="identi_select">
-                    <option>
-                      이름(전화번호)
-                    </option>
-                  </select>
+                              <option>이름(전화번호)</option>
+                            </select>
                             <select id="request_idAll" onChange=request_all()>
-                    <option value="all">
-                      신청목록
-                    </option >
-                    <option value="ago">
-                      지난신청목록
-                    </option>
-                  </select>
+                              <option value="all">신청목록</option>
+                              <option value="ago">지난신청목록</option>
+                            </select>
                         </div>
                         <br>
                         <table width="95%" height="80%" align="center" id="mytable">
@@ -347,28 +361,18 @@
                             </tr>
                         </table>
                     </div>
-                    <!-- #tab1 -->
-
 
                     <div id="tab2" class="tab_content">
                         <br>
                         <div class="search" width="100%" align="center">
                             <select id="name2">
-                  <option>
-                    이름(전화번호)
-                  </option>
-                </select>
+                              <option>이름(전화번호)</option>
+                            </select>
                             <select id="state">
-            <option>
-              전체
-            </option>
-            <option>
-              승인
-            </option>
-            <option>
-              미승인
-            </option>
-          </select>
+                              <option>전체</option>
+                              <option>승인</option>
+                              <option>미승인</option>
+                            </select>
                         </div>
                         <br>
                         <table width="95%" height="80%" align="center" id="mytable2">
@@ -381,35 +385,34 @@
                         </table>
                     </div>
 
-
-                    <!-- #tab2 -->
                     <div id="tab3" class="tab_content">
                         <br>
                         <div class="search" width="100%" align="center">
-                            <select id="tab3_select" onchange="tab3_select_name()">
-                  <option>
-                    이름(전화번호)
-                  </option>
-                </select>
+                            <div class="form-group">
+                                <input type="text" id="date" placeholder="시작">
+                                <input type="text" id="date2" placeholder="종료">
+
+                                <select id="tab3_select" onchange="tab3_select_name()">
+                                  <option>전체</option>
+                                </select>
+                            </div>
                         </div>
                         <br>
                         <table width="95%" height="80%" align="center" id="mytable3">
                             <tr align="center" style="background:#3B5998;color:#FFFFFF;font-size:14px;font-weight:bold">
-                                <td width="5%">이름(전화번호)</td>
-                                <td width="5%">출입여부</td>
-                                <td width="10%">출입시간</td>
+                                <td width="30%">이름(전화번호)</td>
+                                <td width="30%">출입여부</td>
+                                <td width="40%">출입시간</td>
                             </tr>
                         </table>
                     </div>
-                    <!-- #tab3 -->
-
 
                     <div id="tab4" class="tab_content">
                         <br>
                         <div class="search3" width="100%" align="center">
                             <input type="text" name="" placeholder="이름" id="user_name"></input>
                             <input type="text" name="" placeholder="전화번호" id="user_phonenum"></input>
-                            <input type="button" name="" value="추가" id="user_add"></input>
+                            <input type="button" class="btn btn-default" name="" value="추가" id="user_add"></input>
                         </div>
                         <br>
                         <table width="95%" height="80%" align="center" id="mytable4">
@@ -422,19 +425,14 @@
                             </tr>
                         </table>
                     </div>
-                    <!-- #tab4 -->
-
 
                     <div id="tab5" class="tab_content">
                         <br>
                         <div class="search5" width="100%" align="center">
                             <div id="map" style="width:95%;height:400px;"></div>
                             <br>
-                            <!-- <button onclick="removeCircles()">모두 지우기</button> -->
-
-                            <input type="button" name="" value="추가" id="" onclick="geoMap()"></input>
-                            <input type="button" name="" value="지도초기화" id="" onclick="removeCircles()"></input>
-
+                            <input type="button" id="btn_geoAdd" class="btn btn-default" name="" value="추가" id="" onclick="geoMap()"></input>
+                            <input type="button" id="btn_geoReset" class="btn btn-default" name="" value="지도초기화" id="" onclick="removeCircles()"></input>
                         </div>
                         <br>
                         <table width="95%" height="80%" align="center" id="mytable5">
@@ -447,9 +445,6 @@
                             </tr>
                         </table>
                     </div>
-                    <!-- #tab5 -->
-
-
                 </div>
                 <!-- .tab_container -->
             </div>
@@ -719,7 +714,7 @@
             // 거리와 도보 시간, 자전거 시간을 가지고 HTML Content를 만들어 리턴합니다
             var content = '<ul class="info">';
             content += '    <li>';
-            content += '        <span class="label">총거리</span><span class="number">' + distance + '</span>m';
+            content += '        <span class="info2">총거리</span><span class="number">' + distance + '</span>m';
             content += '    </li>';
             /*content += '    <li>';
             content += '        <span class="label">도보</span>' + walkHour + walkMin;
@@ -860,7 +855,7 @@
                                     cell1.innerHTML = data_user[i].name + "<br>(" + data_user[i].phonenum + ")";
                                     cell2.innerHTML = data_request[j].endday + " " + data_request[j].endtime;
                                     // myLocation(data_user[i].lat, data_user[i].lon);
-                                    cell3.innerHTML = "<input type=button value=현재위치... onclick=mymap(" + data_request[j].identifier + "," + data_user[i].lat + "," + data_user[i].lon + ")>";
+                                    cell3.innerHTML = "<input type=button id=btn_now_loc class='btn btn-default' value=현재위치... onclick=mymap(" + data_request[j].identifier + "," + data_user[i].lat + "," + data_user[i].lon + ")>";
                                     if (data_request[j].allow == "대기") {
                                         cell4.innerHTML = "<span style='font-weight:bold; font-size:14px'>" + data_request[j].allow + "</span>";
                                     } else if (data_request[j].allow == "승인") {
@@ -976,7 +971,7 @@
                             } else {
                                 cell4.innerHTML = '알수없음';
                             }
-                            cell5.innerHTML = '<input type=button value=삭제 onclick=delete_user(' + user[i].phonenum + ')"></input>';
+                            cell5.innerHTML = '<input type=button id=user_delete class="btn btn-default" value=삭제 onclick=delete_user(' + user[i].phonenum + ')"></input>';
                         }
                     }
                 }
@@ -1088,11 +1083,11 @@
                             cell3 = row.insertCell(2);
                             cell4 = row.insertCell(3);
                             cell5 = row.insertCell(4);
-                            cell1.innerHTML = '<input type=button value=보기 onclick=myGeoTest(' + temp.lat + ',' + temp.lon + ',' + temp.lastlat + ',' + temp.lastlon + ',' + temp.radius + ')>';
+                            cell1.innerHTML = '<input type=button id=btn_geoview class="btn btn-default" value=보기 onclick=myGeoTest(' + temp.lat + ',' + temp.lon + ',' + temp.lastlat + ',' + temp.lastlon + ',' + temp.radius + ')>';
                             cell2.innerHTML = geoData[i].lat;
                             cell3.innerHTML = geoData[i].lon;
                             cell4.innerHTML = geoData[i].radius + 'M';
-                            cell5.innerHTML = '<input type=button value=삭제 onclick=deleteGeo(' + geoData[i].id + ')>';
+                            cell5.innerHTML = '<input type=button id=btn_geodelete class="btn btn-default" value=삭제 onclick=deleteGeo(' + geoData[i].id + ')>';
                         }
                     }
                 }
@@ -1299,7 +1294,7 @@
     }
 
     function myGeoTest(_lat, _lon, lastlat, lastlon, radius) {
-      removeCircles();
+        removeCircles();
         console.log(_lat);
         console.log(_lon);
         console.log(lastlat);
@@ -1591,7 +1586,7 @@
         // 거리와 도보 시간, 자전거 시간을 가지고 HTML Content를 만들어 리턴합니다
         var content = '<ul class="info">';
         content += '    <li>';
-        content += '        <span class="label">총거리</span><span class="number">' + distance + '</span>m';
+        content += '        <span class="info2">총거리</span><span class="number">' + distance + '</span>m';
         content += '    </li>';
         /*content += '    <li>';
         content += '        <span class="label">도보</span>' + walkHour + walkMin;
@@ -1640,6 +1635,35 @@
 </script>
 
 <style media="screen">
+    #date {
+        width: 200px;
+    }
+
+    .form-control-wrapper {
+        margin: 10px 20px;
+    }
+
+    #user_add,
+    #user_delete,
+    #btn_geoview,
+    #btn_geodelete,
+    #btn_geoAdd {
+        text-align: center;
+        font-weight: bold;
+        font-size: 13px;
+        width: 55px;
+        height: 30px;
+    }
+
+    #btn_now_loc,
+    #btn_geoReset {
+        text-align: center;
+        font-weight: bold;
+        font-size: 13px;
+        width: 90px;
+        height: 30px;
+    }
+
     #mytable,
     #mytable2,
     #mytable3,
@@ -1731,8 +1755,6 @@
 
 
 
-
-
     .info {
         position: relative;
         top: 5px;
@@ -1752,7 +1774,7 @@
         box-shadow: 0px 1px 2px #888;
     }
 
-    .info .label {
+    .info .info2 {
         display: inline-block;
         width: 50px;
     }

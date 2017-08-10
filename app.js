@@ -11,6 +11,7 @@ conn.connect();
 
 app.locals.pretty = true;
 app.set('view engine', 'ejs');
+app.use(express.static('./static'));
 
 app.get('/index', function(req, res) {
     var sql = 'SELECT * FROM request';

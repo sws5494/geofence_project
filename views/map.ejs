@@ -4,7 +4,15 @@
 <head>
     <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsL3C53W0uF4LVWqfrJf5Kdv9KlcgGvME&callback=initMap" async defer></script> -->
     <!-- <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=14ddcae6670e0995f030854bd3f806f1"></script> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,600,700' rel='stylesheet' type='text/css'>
 
+    <link rel="stylesheet" href="css/reset.css">
+    <!-- CSS reset -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Resource style -->
+    <script src="js/modernizr.js"></script>
+    <!-- Modernizr -->
     <title></title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
@@ -12,14 +20,13 @@
         #map {
             float: left;
             height: 100%;
-            width: 85%;
+            width: 100%;
         }
 
         #my {
             float: left;
             width: 20%;
         }
-        /* Optional: Makes the sample page fill the window. */
 
         html,
         body {
@@ -31,13 +38,22 @@
 </head>
 
 <body>
-    <div id=map></div>
-    <div id="pre_set" style="display:none">
-        <input type="button" onclick="myMarker(this.value)" id="myId">
-    </div>
-    <br>
-    <div id="field"></div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="js/main.js"></script>
 
+    <div id=map></div>
+
+    <header>
+        <a id="cd-menu-trigger" href="#0"><span class="cd-menu-text"></span><span class="cd-menu-icon"></span></a>
+    </header>
+
+    <nav id="cd-lateral-nav">
+        <div id="pre_set" style="display:none">
+            <input class="btn btn-default" type="button" onclick="myMarker(this.value)" id="myId">
+        </div>
+        <div id="field"></div>
+    </nav>
+    <br>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=b71237800fad9424af97a5aeba4c0a38&libraries=services"></script>
     <script>
@@ -90,7 +106,7 @@
                             console.log(data_user2.old.name);
                             infowindow.close();
 
-                            iwContent = '<div style="padding:10px;font-weight:bold">' + phonenum[0] + " / " + data_user2.old.name + '</div>',
+                            iwContent = '<div style="padding:15px;font-weight:bold">' + phonenum[0] + " / " + data_user2.old.name + '</div>',
                                 iwRemoveable = true;
 
                             // 인포윈도우를 생성합니다
