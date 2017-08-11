@@ -28,6 +28,10 @@
             width: 20%;
         }
 
+        #myId {
+            font-size: 12px;
+        }
+
         html,
         body {
             height: 100%;
@@ -47,7 +51,7 @@
         <a id="cd-menu-trigger" href="#0"><span class="cd-menu-text"></span><span class="cd-menu-icon"></span></a>
     </header>
 
-    <nav id="cd-lateral-nav">
+    <nav style="overflow:hidden;" id="cd-lateral-nav">
         <div id="pre_set" style="display:none">
             <input class="btn btn-default" type="button" onclick="myMarker(this.value)" id="myId">
         </div>
@@ -86,7 +90,6 @@
         var phonenum;
 
         function myMarker(value) {
-
             marker.setMap(null);
             console.log(value);
             phonenum = value.split('/');
@@ -106,7 +109,14 @@
                             console.log(data_user2.old.name);
                             infowindow.close();
 
-                            iwContent = '<div style="padding:15px;font-weight:bold">' + phonenum[0] + " / " + data_user2.old.name + '</div>',
+                            marker = new daum.maps.Marker({
+                                position: position,
+                                clickable: true // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
+                            });
+
+                            marker.setMap(map);
+                            console.log(data_user2.old.name);
+                            iwContent = '<div style="padding:15px;font-weight:bold;">' + data_user2.old.name + '</div>',
                                 iwRemoveable = true;
 
                             // 인포윈도우를 생성합니다
@@ -119,18 +129,10 @@
                     }
                     xhr.send();
 
-                    marker = new daum.maps.Marker({
-                        position: position,
-                        clickable: true // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
-                    });
-
-
                     var moveLatLon = new daum.maps.LatLng(data_user[i].lat, data_user[i].lon);
                     // 지도 중심을 부드럽게 이동시킵니다
                     // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
                     map.setCenter(moveLatLon);
-
-                    marker.setMap(map);
                 }
             }
         }
@@ -142,7 +144,6 @@
             var div = document.createElement('div');
             div.innerHTML = document.getElementById('pre_set').innerHTML;
             document.getElementById('field').appendChild(div);
-
         }
 
         function myLocation(lat, lon) {
@@ -156,7 +157,7 @@
                     data_user2 = JSON.parse(_tzs);
                     console.log(data_user2.old.name);
 
-                    iwContent = '<div style="padding:10px;font-weight:bold">' + data_user2.old.name + '</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+                    iwContent = '<div style="padding:15px;font-weight:bold;">' + data_user2.old.name + '</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
                         iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 
                     // 인포윈도우를 생성합니다

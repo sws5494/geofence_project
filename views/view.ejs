@@ -1203,7 +1203,7 @@
         console.log(lon);
         // var popUrl = "http://192.168.64.166:3000/map?identifier=" + identifier + "&lat=" + lat + "&lon=" + lon; //팝업창에 출력될 페이지 URL
         var popUrl = "http://192.168.64.166:3000/map?identifier=" + identifier + "&lat=" + lat + "&lon=" + lon; //팝업창에 출력될 페이지 URL
-        var popOption = "width=950, height=700, resizable=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
+        var popOption = "width=1200, height=800, resizable=no, scrollbars=no, status=no;"; //팝업창 옵션(optoin)
         window.open(popUrl, "", popOption);
     }
 
@@ -1635,8 +1635,9 @@
 </script>
 
 <style media="screen">
-    #date {
-        width: 200px;
+    #date,
+    #date2 {
+        width: 150px;
     }
 
     .form-control-wrapper {
